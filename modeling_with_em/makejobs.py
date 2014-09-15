@@ -63,7 +63,7 @@ module load openmpi-1.6-nodlopen
 module load /salilab/diva1/home/modules/sali-libraries
 # IMP stuff
 
-export IMP=/netapp/sali/pellarin/imp-050914/imp-fast-mpich/setup_environment.sh
+export IMP=/netapp/sali/pellarin/imp-050914/imp-fast-openmpi/setup_environment.sh
 
 # write hostname and starting time 
 hostname
