@@ -1,0 +1,75 @@
+{
+    "data": [
+        {
+            "active": true,
+            "fileGroup": {
+                "files": [
+                    "XL_cliques.csv",
+                    "XL_cliques.csv"
+                ]
+            },
+            "mapping": {
+                "Nsp1": [
+                    "Nsp1"
+                ],
+                "Nup159": [
+                    "Nup159"
+                ],
+                "Nup82": [
+                    "Nup82"
+                ]
+            },
+            "name": "XL_cliques",
+            "type": "xquest"
+        }
+    ],
+    "subcomplexes": [],
+    "subunits": [
+        {
+            "chainIds": [
+                "A"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup82",
+            "selection": ":.A",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "B"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup159",
+            "selection": ":.B",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "C"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nsp1",
+            "selection": ":.C",
+            "type": "component"
+        }
+    ],
+    "xlinkanalyzerVersion": "1.1"
+}
