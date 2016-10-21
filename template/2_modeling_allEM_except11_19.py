@@ -65,7 +65,7 @@ if (inputs.symmetry == "True") or (inputs.symmetry == "true") or (inputs.symmetr
     inputs.symmetry = True
 else:
     inputs.symmetry = False
-    
+
 if (inputs.rmf_input is not None) :
     f=open(inputs.rmf_input,"r")
     f.close()
@@ -74,7 +74,7 @@ if (inputs.rmf_frame_number is None) :
 if (inputs.em2d_input is not None) :
     f=open(inputs.em2d_input,"r")
     f.close()
-    
+
 if (inputs.XL_input is None) :
     inputs.XL_input = "./p85_xl1.txt"
 else :
@@ -94,7 +94,7 @@ else:
     inputs.refinement = False
 if (inputs.weight is None) :
     inputs.weight = 10000.0
-    
+
 if (inputs.res_cry is None) :
     inputs.res_cry = 1.0
 if (inputs.res_hom is None) :
@@ -153,7 +153,7 @@ domains = \
 [("Dyn2.1",  "Dyn2.1",     0.48,   fasta_files+"Dyn2.txt",    "Dyn2",    datadirectory+"4DS1.pdb",     "A",  (  1, 92,0),    None,         beadsize,       0,      [0],        4,               None,            None, [3]),
  ("Dyn2.2",  "Dyn2.2",     0.65,   fasta_files+"Dyn2.txt",    "Dyn2",    datadirectory+"4DS1.pdb",     "C",  (  1, 92,0),    None,         beadsize,       0,      [0],        4,               None,            None, [3]),
 
- 
+
  ("Nup82.1", "Nup82.1_1",   0.0,   fasta_files+"Nup82.txt",   "Nup82",   datadirectory+"3PBP1.pdb",    "G",  (  1,452,0),    None,         beadsize,       1,      [11,1],     18,              None,            None, [0]),
  ("Nup82.1", "Nup82.1_11",  0.0,   fasta_files+"Nup82.txt",   "Nup82",   "BEADS",                      " ",  (453,521,0),    None,         beadsize,       101,    [11,101],   0,               None,            None, [0]),
  ("Nup82.1", "Nup82.1_2",   0.0,   fasta_files+"Nup82.txt",   "Nup82",   datadirectory+"cc_tr1_1.pdb", "E",  (522,612,0),    None,         beadsize,       2,      [11,2],     4,               None,            None, [0]),
@@ -202,7 +202,7 @@ domains = \
  ("Nsp1.1",  "Nsp1.1_2",    0.3,   fasta_files+"Nsp1.txt",    "Nsp1",    datadirectory+"cc_tr2_1.pdb", "C",  (742,778,0),    None,         beadsize,       3,      [13,3],     2,               None,            None, [1]),
  ("Nsp1.1",  "Nsp1.1_21",   0.3,   fasta_files+"Nsp1.txt",    "Nsp1",    "BEADS",                      " ",  (779,787,0),    None,         beadsize,       163,    [13,163],   0,               None,            None, [1]),
  ("Nsp1.1",  "Nsp1.1_3",    0.3,   fasta_files+"Nsp1.txt",    "Nsp1",    datadirectory+"cc_tr3_1.pdb", "C",  (788,823,0),    None,         beadsize,       4,      [13,4],     2,               None,            None, [1]),
- 
+
  ("Nsp1.2",  "Nsp1.2_10",   0.38,  fasta_files+"Nsp1.txt",    "Nsp1",    "BEADS",                      " ",  (  1,636,0),    None,         beadsize100,    165,    [17,165],   0,               None,            None, [7]),
  ("Nsp1.2",  "Nsp1.2_1",    0.38,  fasta_files+"Nsp1.txt",    "Nsp1",    datadirectory+"cc_tr1_2.pdb", "C",  (637,727,0),    None,         beadsize,       6,      [17,6],     4,               None,            None, [7]),
  ("Nsp1.2",  "Nsp1.2_11",   0.38,  fasta_files+"Nsp1.txt",    "Nsp1",    "BEADS",                      " ",  (728,741,0),    None,         beadsize,       166,    [17,166],   0,               None,            None, [7]),
@@ -240,8 +240,8 @@ bm1.build_model(data_structure = domains, sequence_connectivity_scale=0.5, seque
 # randomize the initial configuration
 #####################################################
 if (inputs.rmf_input is None) :
-    #simo.shuffle_configuration(50)
-    simo.shuffle_configuration(100)
+    simo.shuffle_configuration(50)
+    #simo.shuffle_configuration(100)
 
 
 #####################################################
@@ -308,7 +308,7 @@ if (True):
                                                         columnmapping = columnmap,
                                                         ids_map = ids_map,
                                                         resolution = 1.0,
-                                                        inner_slope = 0.01,                                                    
+                                                        inner_slope = 0.01,
                                                         filelabel = "scDSS",
                                                         label = "scDSS",
                                                         attributes_for_label = ["XLUniqueID"],
@@ -330,7 +330,7 @@ if (True):
                                                         columnmapping = columnmap,
                                                         ids_map = ids_map,
                                                         resolution = 1.0,
-                                                        inner_slope = 0.01,                                                    
+                                                        inner_slope = 0.01,
                                                         filelabel = "skDSS",
                                                         label = "skDSS",
                                                         attributes_for_label = ["XLUniqueID"],
@@ -341,7 +341,7 @@ if (True):
     xl2.set_psi_is_sampled(False)
     psi2 = xl2.get_psi(1.0)[0]
     psi2.set_scale(0.05)
-    
+
     #----------------------------------------------------
     # wild type ScNup82 complex EDC XL data
     #----------------------------------------------------
@@ -352,7 +352,7 @@ if (True):
                                                         columnmapping = columnmap,
                                                         ids_map = ids_map,
                                                         resolution = 1.0,
-                                                        inner_slope = 0.01,                                                    
+                                                        inner_slope = 0.01,
                                                         filelabel = "scEDC",
                                                         label = "scEDC",
                                                         attributes_for_label = ["XLUniqueID"],
@@ -372,7 +372,7 @@ if (False):
     #----------------------------------------------------
     xl_cliques_psi = 1.0
     xl_cliques_sigma = 5.0
-    
+
     xl4 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
                                                         '../data/XL_cliques_2copies.csv',
                                                         length = 10.0,
@@ -380,7 +380,7 @@ if (False):
                                                         columnmapping = columnmap,
                                                         ids_map = ids_map,
                                                         resolution = 1.0,
-                                                        inner_slope = 0.01,                                                    
+                                                        inner_slope = 0.01,
                                                         filelabel = "cliques",
                                                         label = "cliques",
                                                         attributes_for_label = ["XLUniqueID"],
@@ -407,7 +407,7 @@ if (True):
     dist_min = 3.0
     dist_max = 30.0
     dr_weight = 100.0
-    
+
     dr1 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1417,1417,"Nup159.1"), (1417,1417,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr1.add_to_model()
     dr1.set_label("Nup159_1417-1417")
@@ -421,7 +421,7 @@ if (True):
     dr2.set_weight(dr_weight)
     outputobjects.append(dr2)
     print(dr2.get_output())
-        
+
     dr3 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1384,1384,"Nup159.1"), (1384,1384,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr3.add_to_model()
     dr3.set_label("Nup159_1384-1384")
@@ -442,14 +442,14 @@ if (True):
     dr5.set_weight(dr_weight)
     outputobjects.append(dr5)
     print(dr5.get_output())
-    
+
     dr6 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(517,517,"Nup82.1"), (517,517,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr6.add_to_model()
     dr6.set_label("Nup82_517-517")
     dr6.set_weight(dr_weight)
     outputobjects.append(dr6)
     print(dr6.get_output())
-    
+
     # by Ed Hurt
     if (False):
         """
@@ -459,14 +459,14 @@ if (True):
         dr21.set_weight(dr_weight)
         outputobjects.append(dr21)
         print(dr21.get_output())
-        
+
         dr22 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(541,541,"Nup82.1"), (541,541,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr22.add_to_model()
         dr22.set_label("Nup82_541-541")
         dr22.set_weight(dr_weight)
         outputobjects.append(dr22)
         print(dr22.get_output())
-        
+
         d23 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(580,580,"Nup82.1"), (580,580,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         d23.add_to_model()
         d23.set_label("Nup82_580-580")
@@ -474,7 +474,7 @@ if (True):
         outputobjects.append(d23)
         print(d23.get_output())
         """
-    
+
     print "\nDistance Restraints applied for homo-dimers !!"
     print "weight = ", dr_weight, "dist_min = ", dist_min, "dist_max = ", dist_max, "\n"
 
@@ -484,7 +484,7 @@ if (True):
         dist_min = 3.0
         dist_max = 35.0
         dr_weight = 10.0
-        
+
         dr7 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(649,649,"Nup82.1"), (692,692,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr7.add_to_model()
         dr7.set_label("Nup82_649-692a")
@@ -536,7 +536,7 @@ if (False):
     dist_min = 3.0
     dist_max = 35.0
     dr_weight = 10.0
-    
+
     for nxl, entry in enumerate(db):
         #print nxl, entry
 
@@ -579,8 +579,8 @@ if (False):
     #gem.set_weight(200.0)
     #gem.center_model_on_target_density(simo)
     outputobjects.append(gem)
-    
-    
+
+
     # tail module em density
     mass2 = sum((IMP.atom.Mass(p).get_mass() for h in resdensities for p in IMP.atom.get_leaves(h)))
     gem2 = IMP.pmi.restraints.em.GaussianEMRestraint(resdensities,
@@ -603,11 +603,11 @@ if (False):
 sf = IMP.core.RestraintsScoringFunction(IMP.pmi.tools.get_restraint_set(m))
 print "\nEVAL 1 : ", sf.evaluate(False), " (initial) - ", rank
 
-if (True):
+if (False):
     simo.optimize_floppy_bodies(150)
     print "\nEVAL 2 : ", sf.evaluate(False), " (after calling optimize_floppy_bodies(150)) - ", rank
 
-    initial_nframes = 1000
+    initial_nframes = 200
     mc1 = IMP.pmi.macros.ReplicaExchange0(m,
                                         simo,
                                         monte_carlo_sample_objects = sampleobjects,
@@ -617,7 +617,7 @@ if (True):
                                         monte_carlo_temperature = 1.0,
                                         replica_exchange_minimum_temperature = 1.0,
                                         replica_exchange_maximum_temperature = 2.5,
-                                        number_of_best_scoring_models = 100,
+                                        number_of_best_scoring_models = initial_nframes,
                                         monte_carlo_steps = 10,
                                         number_of_frames = initial_nframes,
                                         write_initial_rmf = True,
@@ -643,15 +643,27 @@ else:
 # EM 2D restraint for each class
 #####################################################
 if (inputs.em2d_input is not None):
-    images = [inputs.em2d_input]
-    
+    #images = [inputs.em2d_input]
+    images = []
+    for class_num in range(0, 11):  #for 0-10
+        pgm = "../data/em2d/" + str(class_num) + ".pgm"
+        images.append(pgm)
+    for class_num in range(12, 19): #for 12-18
+        pgm = "../data/em2d/" + str(class_num) + ".pgm"
+        images.append(pgm)
+    for class_num in range(20, 23): #for 20-22
+        pgm = "../data/em2d/" + str(class_num) + ".pgm"
+        images.append(pgm)
+    print images
+
     em2d = em2d_nup82.ElectronMicroscopy2D (simo,
                                             images,
                                             resolution = 1.0,
                                             pixel_size = 3.23,
                                             image_resolution = 35.0,
-                                            projection_number = 100)
-                                            #projection_number = 400)
+                                            projection_number = 100,
+                                            #projection_number = 400,
+                                            n_components = 2)
     em2d.add_to_model()
     em2d.set_weight(em2d_weight)
     outputobjects.append(em2d)
@@ -689,4 +701,3 @@ mc2 = IMP.pmi.macros.ReplicaExchange0(m,
                                     replica_exchange_object = rex1)
 mc2.execute_macro()
 print "\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank
-
