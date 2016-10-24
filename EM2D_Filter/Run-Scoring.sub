@@ -1,0 +1,35 @@
+#!/bin/bash 
+#$ -l arch=linux-x64 
+#$ -l h_rt=336:0:0
+#$ -l mem_free=4G
+#$ -S /bin/bash 
+#$ -N Scoring
+#$ -cwd 
+#$ -j y 
+#$ -R y
+#$ -t 1-200
+
+#date
+#hostname
+
+source /netapp/sali/ilan/.bash_profile
+module load openmpi-x86_64
+module load imp/last_ok_build
+
+
+i=$(($SGE_TASK_ID - 1))
+j=$(($i*10))
+
+old_IFS=$IFS
+IFS=$'\n'
+lines=($(cat List-RMF))
+IFS=$old_IFS
+
+for k in `seq ${j} $((j + 9))`;
+do
+    mkdir Result-$(echo ${lines[$k]} | awk 'BEGIN{FS="/"}{print $5}' | awk 'BEGIN{FS="."}{print $1}' | awk 'BEGIN{FS="_"}{print $2}')
+    cp EM2D-Filter.py Images-Paula Result-$(echo ${lines[$k]} |  awk 'BEGIN{FS="/"}{print $5}' | awk 'BEGIN{FS="."}{print $1}' | awk 'BEGIN{FS="_"}{print $2}')
+    cd Result-$(echo ${lines[$k]} |  awk 'BEGIN{FS="/"}{print $5}' | awk 'BEGIN{FS="."}{print $1}' | awk 'BEGIN{FS="_"}{print $2}')
+    python EM2D-Filter.py ${lines[$k]} Images-Paula 3.23 10000 15 15 0
+    cd ..
+done
