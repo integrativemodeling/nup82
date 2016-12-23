@@ -8,7 +8,7 @@ Get-Distribution-Statistics.sh: Script to analyze the results of the filtering; 
 Satisfied-Classes-Count.sh: Quick script to format the results of the analysis into a summary text file.
 Models_Selection_Threshold.py: Script to select models given a threshold (either a user input or a adaptive threshold).
 
-## Running the IMP/PMI scripts for filtering the Nup82 complex based on EM2D:
+## Running the IMP/PMI scripts for filtering stage of modeling:
 1) python EM2D-Filter.py input_rmf_file list_of_class_averages angstrom_per_pixel number_of_projections model_resolution image_resolution frame_of_rmf_to_read
 Inputs:   input_rmf_file: structure to be projected and registered against an class averages
           list_of_class_averages: text file listing the list of class averages.
