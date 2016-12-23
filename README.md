@@ -10,18 +10,25 @@ The modeling protocol will work with a default build of IMP, but for most effect
 1_run_initial_random_EMclass2.sh: script that runs the PMI script 1_modeling_initial_random.py. 
 
 EM2D-Filter.py: Script to compute a score for a given model against a set of class averages. 
+
 Get-Distribution-Statistics.sh: Script to analyze the results of the filtering; requires GNUPlot and ImageMagick. 
+
 Satisfied-Classes-Count.sh: Quick script to format the results of the analysis into a summary text file. 
+
 Models_Selection_Threshold.py: Script to select models given a threshold (either a user input or a adaptive threshold).
 
 2_run_refinement.sh: script that runs the PMI script 2_modeling_allEM_except11_19.py. 
 
 ## (1) Running the IMP/PMI scripts for the initial stage of modeling
 1) python 1_modeling_initial_random.py -r repeats -out outputdir -em2d class_average -weight em2d_weight
-The script will generate repeats number of independent and uncorrelated trajectories from different random initial configuration restrained by all information available about the system (e.g., physics, structures) and restrained by one class_average.
+
+The script will generate independent and uncorrelated trajectories from different random initial configuration restrained by all information available about the system (e.g., physics, structures) and restrained by one class_average.
 
 ## (2) Running the IMP scripts for the filtering stage of modeling:
+First, we use IMP to register models against EM class averages and then select models that satisfy those class averages the best. Here, the filtering is applied to the Nup82 Complex. The filtering protocol will work with a default build of IMP. The scripts require GNUplot and ImageMagick.
+
 1) python EM2D-Filter.py input_rmf_file list_of_class_averages angstrom_per_pixel number_of_projections model_resolution image_resolution frame_of_rmf_to_read 
+
 Inputs: input_rmf_file: structure to be projected and registered against class averages 
 list_of_class_averages: text file listing the list of class averages.
 Output: A list of score for the structure against each image (1-cross correlation).
@@ -32,7 +39,8 @@ Outputs: Histogram of the score for each images given a set of models Automatica
 
 ## (3) Running the IMP/PMI scripts for the refinement stage of modeling
 1) python 2_modeling_allEM_except11_19.py -r repeats -out outputdir -rmf starting_rmf -rmf_n rmf_frame -em2d class_average -weight em2d_weight
-The script will generate number of independent and uncorrelated trajectories, refined from the best-scoring configurations after the EM filter.
+
+The script will generate independent and uncorrelated trajectories, refined from the best-scoring configurations after the EM filter.
 
 ## Information
 _Author(s)_: Seung Joong Kim, Ilan E. Chemmama, Riccardo Pellarin 
