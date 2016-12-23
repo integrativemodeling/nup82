@@ -22,7 +22,7 @@ Models_Selection_Threshold.py: Script to select models given a threshold (either
 ## (1) Running the IMP/PMI scripts for the initial stage of modeling
 1) python 1_modeling_initial_random.py -r repeats -out outputdir -em2d class_average -weight em2d_weight
 
-The script will generate independent and uncorrelated trajectories from different random initial configuration restrained by all information available about the system (e.g., physics, structures) and restrained by one class_average.
+The script will generate independent and uncorrelated trajectories from different random initial configuration restrained by all data and information available for the system (e.g., chemical cross-linking data, excluded volume, structures) and restrained by one EM 2D class average.
 
 ## (2) Running the IMP scripts for the filtering stage of modeling:
 First, we use IMP to register models against EM class averages and then select models that satisfy those class averages the best. Here, the filtering is applied to the Nup82 Complex. The filtering protocol will work with a default build of IMP. The scripts require GNUplot and ImageMagick.
@@ -40,7 +40,7 @@ Outputs: Histogram of the score for each images given a set of models Automatica
 ## (3) Running the IMP/PMI scripts for the refinement stage of modeling
 1) python 2_modeling_allEM_except11_19.py -r repeats -out outputdir -rmf starting_rmf -rmf_n rmf_frame -em2d class_average -weight em2d_weight
 
-The script will generate independent and uncorrelated trajectories, refined from the best-scoring configurations after the EM filter.
+The script will generate independent and uncorrelated trajectories, refined from the best-scoring configurations after the EM filter.  all data and information available for the system (e.g., chemical cross-linking data, excluded volume, structures) and all good EM 2D class averages (except classes 11 and 19) are used.
 
 ## Information
 _Author(s)_: Seung Joong Kim, Ilan E. Chemmama, Riccardo Pellarin 
