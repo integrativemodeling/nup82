@@ -16,11 +16,11 @@ Models_Selection_Threshold.py: Script to select models given a threshold (either
 
 2_run_refinement.sh: script that runs the PMI script 2_modeling_allEM_except11_19.py. 
 
-## Running the IMP/PMI scripts for the initial stage of modeling
+## (1) Running the IMP/PMI scripts for the initial stage of modeling
 1) python 1_modeling_initial_random.py -r repeats -out outputdir -em2d class_average -weight em2d_weight
 The script will generate repeats number of independent and uncorrelated trajectories from different random initial configuration restrained by all information available about the system (e.g., physics, structures) and restrained by one class_average.
 
-## Running the IMP scripts for the filtering stage of modeling:
+## (2) Running the IMP scripts for the filtering stage of modeling:
 1) python EM2D-Filter.py input_rmf_file list_of_class_averages angstrom_per_pixel number_of_projections model_resolution image_resolution frame_of_rmf_to_read 
 Inputs: input_rmf_file: structure to be projected and registered against class averages 
 list_of_class_averages: text file listing the list of class averages.
@@ -30,9 +30,9 @@ Output: A list of score for the structure against each image (1-cross correlatio
 Inputs: List of files containing the scores. This is hard coded in the script here.
 Outputs: Histogram of the score for each images given a set of models Automatically made plots for the distributions of the scores Satistics (average, standard deviation, min, max) for the score of a set of models given a class average.
 
-## Running the IMP/PMI scripts for the refinement stage of modeling
+## (3) Running the IMP/PMI scripts for the refinement stage of modeling
 1) python 2_modeling_allEM_except11_19.py -r repeats -out outputdir -rmf starting_rmf -rmf_n rmf_frame -em2d class_average -weight em2d_weight
-The script will generate repeats number of independent and uncorrelated trajectories from different random initial configuration restrained by all information available about the system (e.g., physics, structures) and all class averages
+The script will generate number of independent and uncorrelated trajectories, refined from the best-scoring configurations after the EM filter.
 
 ## Information
 _Author(s)_: Seung Joong Kim, Ilan E. Chemmama, Riccardo Pellarin 
