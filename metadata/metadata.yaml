@@ -1,0 +1,7 @@
+title: Nup82 Complex
+tags: [chemical crosslinks, EM class average, MODELLER, PMI]
+pmid: 27839866
+prereqs: [modeller, python/scikit, python/matplotlib, python/biopython]
+test:
+    runtime: 24h
+    build: release

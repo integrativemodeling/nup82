@@ -58,5 +58,4 @@ _Testable_: Yes.
 _Parallelizeable_: Yes
 
 _Publications_:
- 
- \*These authors contributed equally to this work as co-first authors.
+ - J. Fernandez-Martinez, S.J. Kim, Y. Shi, P. Upla, R. Pellarin, M. Gagnon, I.E. Chemmama, J. Wang, I. Nudelman, W. Zhang, R. Williams, W.J. Rice, D.L. Stokes, D. Zenklusen, B.T. Chait, A. Sali, M.P. Rout, [Structure and Function of the Nuclear Pore Complex Cytoplasmic mRNA Export Platform](https://www.ncbi.nlm.nih.gov/pubmed/27839866), Cell, 2016, 167(5), 10.1016/j.cell.2016.10.028.
