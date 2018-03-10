@@ -1,0 +1,168 @@
+
+######################
+## EM 2D class 23   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/0.pgm ../data/em2d/1.pgm ../data/em2d/2.pgm ../data/em2d/3.pgm ../data/em2d/4.pgm ../data/em2d/5.pgm ../data/em2d/6.pgm ../data/em2d/7.pgm ../data/em2d/8.pgm ../data/em2d/9.pgm ../data/em2d/10.pgm ../data/em2d/12.pgm ../data/em2d/13.pgm ../data/em2d/14.pgm ../data/em2d/15.pgm ../data/em2d/16.pgm ../data/em2d/17.pgm ../data/em2d/18.pgm ../data/em2d/20.pgm ../data/em2d/21.pgm ../data/em2d/22.pgm 
+Number of atom particles 17184
+Total score = 1.93972
+
+######################
+## EM 2D class 22   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/22.pgm 
+Number of atom particles 17184
+Total score = 0.0785627
+
+######################
+## EM 2D class 21   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/21.pgm 
+Number of atom particles 17184
+Total score = 0.0779741
+
+######################
+## EM 2D class 20   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/20.pgm 
+Number of atom particles 17184
+Total score = 0.0657174
+
+######################
+## EM 2D class 19   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/19.pgm 
+Number of atom particles 17184
+Total score = 0.19656
+
+######################
+## EM 2D class 18   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/18.pgm 
+Number of atom particles 17184
+Total score = 0.0881314
+
+######################
+## EM 2D class 17   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/17.pgm 
+Number of atom particles 17184
+Total score = 0.0798242
+
+######################
+## EM 2D class 16   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/16.pgm 
+Number of atom particles 17184
+Total score = 0.096725
+
+######################
+## EM 2D class 15   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/15.pgm 
+Number of atom particles 17184
+Total score = 0.0696875
+
+######################
+## EM 2D class 14   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/14.pgm 
+Number of atom particles 17184
+Total score = 0.116911
+
+######################
+## EM 2D class 13   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/13.pgm 
+Number of atom particles 17184
+Total score = 0.0765622
+
+######################
+## EM 2D class 12   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/12.pgm 
+Number of atom particles 17184
+Total score = 0.0866414
+
+######################
+## EM 2D class 11   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/11.pgm 
+Number of atom particles 17184
+Total score = 0.20843
+
+######################
+## EM 2D class 10   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/10.pgm 
+Number of atom particles 17184
+Total score = 0.0734281
+
+######################
+## EM 2D class 9   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/9.pgm 
+Number of atom particles 17184
+Total score = 0.102189
+
+######################
+## EM 2D class 8   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/8.pgm 
+Number of atom particles 17184
+Total score = 0.103498
+
+######################
+## EM 2D class 7   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/7.pgm 
+Number of atom particles 17184
+Total score = 0.102014
+
+######################
+## EM 2D class 6   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/6.pgm 
+Number of atom particles 17184
+Total score = 0.0874526
+
+######################
+## EM 2D class 5   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/5.pgm 
+Number of atom particles 17184
+Total score = 0.0659166
+
+######################
+## EM 2D class 4   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/4.pgm 
+Number of atom particles 17184
+Total score = 0.105694
+
+######################
+## EM 2D class 3   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/3.pgm 
+Number of atom particles 17184
+Total score = 0.155229
+
+######################
+## EM 2D class 2   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/2.pgm 
+Number of atom particles 17184
+Total score = 0.116534
+
+######################
+## EM 2D class 1   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/1.pgm 
+Number of atom particles 17184
+Total score = 0.0786033
+
+######################
+## EM 2D class 0   ##
+######################
+em2d_single_score tr_225-17r.pdb -r 35 -s 3.23 -n 1000 -l 2 ../data/em2d/0.pgm 
+Number of atom particles 17184
+Total score = 0.112426

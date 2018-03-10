@@ -1,0 +1,207 @@
+{
+    "data": [
+        {
+            "active": true,
+            "fileGroup": {
+                "files": [
+                    "XL_n82n84_DSS.csv"
+                ]
+            },
+            "mapping": {
+                "Nup120": [
+                    "Nup120"
+                ],
+                "Nup145c": [
+                    "Nup145c"
+                ],
+                "Nup159": [
+                    "Nup159"
+                ],
+                "Nup82": [
+                    "Nup82"
+                ],
+                "Nup85": [
+                    "Nup85"
+                ],
+                "Seh1": [
+                    "Seh1"
+                ]
+            },
+            "name": "n82n84",
+            "type": "xquest"
+        }
+    ],
+    "subcomplexes": [],
+    "subunits": [
+        {
+            "chainIds": [
+                "I"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup84",
+            "selection": ":.I",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "J"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup85",
+            "selection": ":.J",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "K"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup120",
+            "selection": ":.K",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "L"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup133",
+            "selection": ":.L",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "M"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup145c",
+            "selection": ":.M",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "N"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Seh1",
+            "selection": ":.N",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "O"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Sec13",
+            "selection": ":.O",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "A",
+                "B"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Dyn2",
+            "selection": ":.A,.B",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "C",
+                "D"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup82",
+            "selection": ":.C,.D",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "E",
+                "F"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup159",
+            "selection": ":.E,.F",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "G",
+                "H"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nsp1",
+            "selection": ":.G,.H",
+            "type": "component"
+        }
+    ],
+    "xlinkanalyzerVersion": "1.1"
+}

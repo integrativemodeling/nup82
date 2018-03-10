@@ -1,0 +1,26 @@
+nup84 complex - light gray
+nup82 complex - dodger blue
+
+A B - gray
+
+C - orange red
+D - medium blue
+E - orange
+F - deep sky blue
+G - yellow
+H - aquamarine
+
+I - tan
+J - light blue
+
+K - light green (Nup84)
+L - lime green  (Nup85)
+M - gold        (Nup120)
+N - sienna      (Nup133)
+O - dark magenta    (Nup145c)
+P - hot pink    (Seh1)
+Q - coral       (Sec13)
+
+
+
+

@@ -1,0 +1,9 @@
+ _aln.pos         10        20        30        40        50        60
+5cws_C1   MDEIITRWATDLAKYQKEFKEQAAKVMEWDRLLVENGEKIQKLYTSTYEAERASNEIERQLSNVESQQ 
+NS1       LDDLVTKWTNQLTESASHFEQYTKKINSWDQVLVKGGEQISQLYSDAVMAEHSQNKIDQSLQYIERQQ 
+ _consrvd  *   * *   *      *     *   **  **  ** *  **     **   * *   *   * **
+
+ _aln.p   70        80        90
+5cws_C1   EELTAWLDRYERELDELYAKQMG 
+NS1       DELENFLDNFETKTEALLSDVVS 
+ _consrvd  **   **  *     *

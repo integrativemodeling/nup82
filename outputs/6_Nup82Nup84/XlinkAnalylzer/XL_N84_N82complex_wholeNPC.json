@@ -1,0 +1,241 @@
+{
+    "data": [
+        {
+            "active": true,
+            "fileGroup": {
+                "files": [
+                    "XL_N84_N82complex_wholeNPC.csv"
+                ]
+            },
+            "mapping": {
+                "Dyn2": [
+                    "Dyn2"
+                ],
+                "Nup82": [
+                    "Nup82"
+                ],
+                "Nup159": [
+                    "Nup159"
+                ],
+                "Nsp1": [
+                    "Nsp1"
+                ],
+                "Nup84": [
+                    "Nup84"
+                ],
+                "Nup85": [
+                    "Nup85"
+                ],
+                "Nup116": [
+                    "Nup116"
+                ],
+                "Nup120": [
+                    "Nup120"
+                ],
+                "Nup133": [
+                    "Nup133"
+                ],
+                "Nup145c": [
+                    "Nup145c"
+                ],
+                "Sec13": [
+                    "Sec13"
+                ],
+                "Seh1": [
+                    "Seh1"
+                ]
+            },
+            "name": "XL_N84_N82complex_wholeNPC",
+            "type": "xquest"
+        }
+    ],
+    "subcomplexes": [],
+    "subunits": [
+        {
+            "chainIds": [
+                "A",
+                "B"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Dyn2",
+            "selection": ":.A,.B",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "C",
+                "D"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup82",
+            "selection": ":.C,.D",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "E",
+                "F"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup159",
+            "selection": ":.E,.F",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "G",
+                "H"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nsp1",
+            "selection": ":.G,.H",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "I",
+                "J"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup116",
+            "selection": ":.I,.J",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "K"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup84",
+            "selection": ":.K",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "L"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup85",
+            "selection": ":.L",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "M"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup120",
+            "selection": ":.M",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "N"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup133",
+            "selection": ":.N",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "O"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup145c",
+            "selection": ":.O",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "P"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Seh1",
+            "selection": ":.P",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "Q"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Sec13",
+            "selection": ":.Q",
+            "type": "component"
+        }
+    ],
+    "xlinkanalyzerVersion": "1.1"
+}

@@ -1,0 +1,179 @@
+{
+    "data": [
+        {
+            "active": true,
+            "fileGroup": {
+                "files": [
+                    "XlinkAnalyzer_wtNup84_DSS_standardized.csv"
+                ]
+            },
+            "mapping": {
+                "Nup120": [
+                    "Nup120"
+                ],
+                "Nup133": [
+                    "Nup133"
+                ],
+                "Nup145c": [
+                    "Nup145c"
+                ],
+                "Nup84": [
+                    "Nup84"
+                ],
+                "Nup85": [
+                    "Nup85"
+                ],
+                "Sec13": [
+                    "Sec13"
+                ],
+                "Seh1": [
+                    "Seh1"
+                ]
+            },
+            "name": "DSS",
+            "type": "xquest"
+        },
+        {
+            "active": true,
+            "fileGroup": {
+                "files": [
+                    "XlinkAnalyzer_wtNup84_EDC_standardized.csv"
+                ]
+            },
+            "mapping": {
+                "Nup120": [
+                    "Nup120"
+                ],
+                "Nup133": [
+                    "Nup133"
+                ],
+                "Nup145c": [
+                    "Nup145c"
+                ],
+                "Nup84": [
+                    "Nup84"
+                ],
+                "Nup85": [
+                    "Nup85"
+                ],
+                "Sec13": [
+                    "Sec13"
+                ],
+                "Seh1": [
+                    "Seh1"
+                ]
+            },
+            "name": "EDC",
+            "type": "xquest"
+        }
+    ],
+    "subcomplexes": [],
+    "subunits": [
+        {
+            "chainIds": [
+                "A"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup84",
+            "selection": ":.A",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "B"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup85",
+            "selection": ":.B",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "C"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup120",
+            "selection": ":.C",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "D"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup133",
+            "selection": ":.D",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "E"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Nup145c",
+            "selection": ":.E",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "F"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Seh1",
+            "selection": ":.F",
+            "type": "component"
+        },
+        {
+            "chainIds": [
+                "G"
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "domains": [],
+            "name": "Sec13",
+            "selection": ":.G",
+            "type": "component"
+        }
+    ],
+    "xlinkanalyzerVersion": "1.1"
+}
