@@ -55,6 +55,9 @@ parser.add_argument('-res_hom', action="store", dest="res_hom", help="resolution
 parser.add_argument('-res_ev', action="store", dest="res_ev", help="resolution of the excluded volume restraints" )
 parser.add_argument('-res_compo', action="store", dest="res_compo", help="resolution of the composite restraints" )
 parser.add_argument('-draw_hierarchy', action="store", dest="draw_hierarchy", help="draw hierarchy" )
+parser.add_argument('--dry-run', action='store_true',
+                    help="Dry run (do not do any sampling)")
+
 inputs = parser.parse_args()
 
 #----------------------------------------------------
@@ -116,6 +119,7 @@ print(inputs)
 #####################################################
 m = IMP.Model()
 simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
+simo.dry_run = inputs.dry_run
 #simo = representation_nup82.Representation(m,upperharmonic=True,disorderedlength=False)
 
 
@@ -594,8 +598,9 @@ sf = IMP.core.RestraintsScoringFunction(IMP.pmi.tools.get_restraint_set(m))
 print("\nEVAL 1 : ", sf.evaluate(False), " (initial) - ", rank)
 
 if (True):
-    simo.optimize_floppy_bodies(150)
-    print("\nEVAL 2 : ", sf.evaluate(False), " (after calling optimize_floppy_bodies(150)) - ", rank)
+    if not inputs.dry_run:
+        simo.optimize_floppy_bodies(150)
+        print("\nEVAL 2 : ", sf.evaluate(False), " (after calling optimize_floppy_bodies(150)) - ", rank)
 
     initial_nframes = 1000
     mc1 = IMP.pmi.macros.ReplicaExchange0(m,
@@ -619,6 +624,7 @@ if (True):
                                         global_output_directory = "pre-EM2D_output",
                                         rmf_dir = "rmfs/",
                                         best_pdb_dir = "pdbs/",
+                                        test_mode=simo.dry_run,
                                         replica_stat_file_suffix = "stat_replica")
     mc1.execute_macro()
     rex1 = mc1.get_replica_exchange_object()
@@ -677,6 +683,7 @@ mc2 = IMP.pmi.macros.ReplicaExchange0(m,
                                     rmf_dir = "rmfs/",
                                     best_pdb_dir = "pdbs/",
                                     replica_stat_file_suffix = "stat_replica",
+                                    test_mode=simo.dry_run,
                                     replica_exchange_object = rex1)
 mc2.execute_macro()
 print("\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank)
