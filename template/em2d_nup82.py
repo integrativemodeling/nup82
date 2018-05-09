@@ -9,6 +9,8 @@ import IMP.algebra
 import IMP.atom
 import IMP.em2d
 import IMP.pmi.tools
+import ihm.location
+import ihm.dataset
 
 
 #############################################################################################
@@ -24,6 +26,7 @@ class ElectronMicroscopy2D():
         pixel_size,
         image_resolution,
         projection_number,
+        micrographs_number=None,
         resolution=None,
         n_components = 1):
 
@@ -31,6 +34,25 @@ class ElectronMicroscopy2D():
         self.m = representation.prot.get_model()
         self.rs = IMP.RestraintSet(self.m, 'em2d')
         self.label = "None"
+
+        self.datasets = []
+        for image in images:
+            if representation:
+                d = representation.get_file_dataset(image)
+                if d:
+                    self.datasets.append(d)
+                    continue
+            l = ihm.location.InputFileLocation(image,
+                                 details="Electron microscopy class average")
+            d = ihm.dataset.EM2DClassDataset(l)
+            self.datasets.append(d)
+
+        if representation:
+            for p, state in representation._protocol_output:
+                for i in range(len(self.datasets)):
+                    p.add_em2d_restraint(state, self, i, resolution, pixel_size,
+                                         image_resolution, projection_number,
+                                         micrographs_number)
 
         ps = []
 
