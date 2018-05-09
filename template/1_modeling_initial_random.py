@@ -20,6 +20,8 @@ import em2d_nup82
 #import IMP.pmi.restraints.em2d
 import IMP.pmi.restraints.basic
 import IMP.pmi.restraints.proteomics
+import IMP.pmi.mmcif
+import ihm
 #import representation_nup82
 import IMP.pmi.representation
 import IMP.pmi.macros
@@ -57,6 +59,8 @@ parser.add_argument('-res_compo', action="store", dest="res_compo", help="resolu
 parser.add_argument('-draw_hierarchy', action="store", dest="draw_hierarchy", help="draw hierarchy" )
 parser.add_argument('--dry-run', action='store_true',
                     help="Dry run (do not do any sampling)")
+parser.add_argument('--mmcif', action='store', type=str, default=None,
+                    help="Record modeling protocol in a named mmCIF file")
 
 inputs = parser.parse_args()
 
@@ -134,6 +138,16 @@ except ImportError:
     rank = 0
 
 print("rank = ", rank)
+
+if inputs.mmcif:
+    # Record the modeling protocol to an mmCIF file
+    po = IMP.pmi.mmcif.ProtocolOutput(open(inputs.mmcif, 'w'))
+    simo.add_protocol_output(po)
+    po.system.title = ('Structure of the S. cerevisiae nuclear pore complex '
+                       'cytoplasmic mRNA export platform, Nup82')
+    # Add publication
+    po.system.citations.append(ihm.Citation.from_pubmed_id(27839866))
+
 
 rbmaxtrans = 2.00
 fbmaxtrans = 3.00
@@ -687,3 +701,6 @@ mc2 = IMP.pmi.macros.ReplicaExchange0(m,
                                     replica_exchange_object = rex1)
 mc2.execute_macro()
 print("\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank)
+
+if inputs.mmcif:
+    po.flush()
