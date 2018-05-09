@@ -703,4 +703,19 @@ mc2.execute_macro()
 print("\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank)
 
 if inputs.mmcif:
+    # Read in final model
+    for c in simo.get_component_names():
+        simo.set_coordinates_from_rmf(c,
+                '../outputs/4_em2d_single_scores_final35r_best/225-17.rmf3', 0,
+                force_rigid_update=True)
+    # todo: fill in correct numbers
+    pp = po._add_simple_postprocessing(num_models_begin=100000,
+                                       num_models_end=463)
+    e = po._add_simple_ensemble(pp, name="Cluster 0", num_models=370,
+                                drmsd=None, num_models_deposited=1,
+                                localization_densities={}, ensemble_file=None)
+
+    model = po.add_model(e.model_group)
+    model._is_restrained = False # We have no restraint data for this model
+
     po.flush()
