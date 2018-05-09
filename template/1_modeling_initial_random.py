@@ -121,10 +121,13 @@ simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedleng
 #####################################################
 # setting up parameters
 #####################################################
-from mpi4py import MPI
+try:
+    from mpi4py import MPI
+    comm = MPI.COMM_WORLD
+    rank = comm.Get_rank()
+except ImportError:
+    rank = 0
 
-comm = MPI.COMM_WORLD
-rank = comm.Get_rank()
 print "rank = ", rank
 
 rbmaxtrans = 2.00
