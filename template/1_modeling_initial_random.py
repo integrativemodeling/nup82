@@ -4,6 +4,7 @@
 # by Seung Joong Kim and Riccardo Pellarin
 # at Andrej Sali group, University of California San Francisco (UCSF)
 #####################################################
+from __future__ import print_function
 import IMP
 import IMP.core
 #import IMP.base
@@ -107,7 +108,7 @@ if (inputs.draw_hierarchy == "True") or (inputs.draw_hierarchy == "true") or (in
     inputs.draw_hierarchy = True
 else:
     inputs.draw_hierarchy = False
-print inputs
+print(inputs)
 
 
 #####################################################
@@ -128,7 +129,7 @@ try:
 except ImportError:
     rank = 0
 
-print "rank = ", rank
+print("rank = ", rank)
 
 rbmaxtrans = 2.00
 fbmaxtrans = 3.00
@@ -271,7 +272,7 @@ ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo, resolution = 
 ev.add_to_model()
 outputobjects.append(ev)
 print(ev.get_output())
-print "ExcludedVolumeSphere !!\n"
+print("ExcludedVolumeSphere !!\n")
 
 
 #####################################################
@@ -282,7 +283,7 @@ eb = IMP.pmi.restraints.basic.ExternalBarrier(simo, radius = 300)
 eb.add_to_model()
 outputobjects.append(eb)
 print(eb.get_output())
-print "ExternalBarrier !!\n"
+print("ExternalBarrier !!\n")
 
 
 #####################################################
@@ -478,8 +479,8 @@ if (True):
         print(d23.get_output())
         """
 
-    print "\nDistance Restraints applied for homo-dimers !!"
-    print "weight = ", dr_weight, "dist_min = ", dist_min, "dist_max = ", dist_max, "\n"
+    print("\nDistance Restraints applied for homo-dimers !!")
+    print("weight = ", dr_weight, "dist_min = ", dist_min, "dist_max = ", dist_max, "\n")
 
     # for skNup82 homo-dimers - DISABLED
     if (False):
@@ -516,8 +517,8 @@ if (True):
         outputobjects.append(dr10)
         print(dr10.get_output())
 
-        print "\nDistance Restraints applied for skNup82 homo-dimers !!"
-        print "weight = ", dr_weight, "dist_min = ", dist_min, "dist_max = ", dist_max, "\n"
+        print("\nDistance Restraints applied for skNup82 homo-dimers !!")
+        print("weight = ", dr_weight, "dist_min = ", dist_min, "dist_max = ", dist_max, "\n")
         """
 
 
@@ -558,8 +559,8 @@ if (False):
         outputobjects.append(dr)
         print(dr.get_output())
 
-    print "\nDistance Restraints applied for XL cliques !!"
-    print "weight = ", dr_weight, "dist_min = ", dist_min, "dist_max = ", dist_max, "\n"
+    print("\nDistance Restraints applied for XL cliques !!")
+    print("weight = ", dr_weight, "dist_min = ", dist_min, "dist_max = ", dist_max, "\n")
 
 
 
@@ -604,11 +605,11 @@ if (False):
 # Metropolis Monte Carlo sampling with Replica Exchange
 #####################################################
 sf = IMP.core.RestraintsScoringFunction(IMP.pmi.tools.get_restraint_set(m))
-print "\nEVAL 1 : ", sf.evaluate(False), " (initial) - ", rank
+print("\nEVAL 1 : ", sf.evaluate(False), " (initial) - ", rank)
 
 if (True):
     simo.optimize_floppy_bodies(150)
-    print "\nEVAL 2 : ", sf.evaluate(False), " (after calling optimize_floppy_bodies(150)) - ", rank
+    print("\nEVAL 2 : ", sf.evaluate(False), " (after calling optimize_floppy_bodies(150)) - ", rank)
 
     initial_nframes = 1000
     mc1 = IMP.pmi.macros.ReplicaExchange0(m,
@@ -635,10 +636,10 @@ if (True):
                                         replica_stat_file_suffix = "stat_replica")
     mc1.execute_macro()
     rex1 = mc1.get_replica_exchange_object()
-    print "\nEVAL 3 : ", sf.evaluate(False), " (after performing the pre-sampling) - ", rank
+    print("\nEVAL 3 : ", sf.evaluate(False), " (after performing the pre-sampling) - ", rank)
 else:
     rex1 = None
-    print "\n>> NO pre-sampling"
+    print("\n>> NO pre-sampling")
 
 
 #####################################################
@@ -661,7 +662,7 @@ if (inputs.em2d_input is not None):
     outputobjects.append(em2d)
 
     sf = IMP.core.RestraintsScoringFunction(IMP.pmi.tools.get_restraint_set(m))
-    print "\nEVAL 4 : ", sf.evaluate(False), " (after applying the EM 2D restraint) - ", rank
+    print("\nEVAL 4 : ", sf.evaluate(False), " (after applying the EM 2D restraint) - ", rank)
 
 
 #####################################################
@@ -692,4 +693,4 @@ mc2 = IMP.pmi.macros.ReplicaExchange0(m,
                                     replica_stat_file_suffix = "stat_replica",
                                     replica_exchange_object = rex1)
 mc2.execute_macro()
-print "\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank
+print("\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank)
