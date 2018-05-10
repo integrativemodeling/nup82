@@ -715,6 +715,24 @@ if inputs.mmcif:
                                 drmsd=None, num_models_deposited=1,
                                 localization_densities={}, ensemble_file=None)
 
+    # Add localization densities
+    for fname, domains in [
+             ('Dyn2', [po.asym_units['Dyn2.1'], po.asym_units['Dyn2.2']]),
+             ('Nup82.1_NTD', [po.asym_units['Nup82.1'](1,521)]),
+             ('Nup82.1_CTD', [po.asym_units['Nup82.1'](522,713)]),
+             ('Nup82.2_NTD', [po.asym_units['Nup82.2'](1,521)]),
+             ('Nup82.2_CTD', [po.asym_units['Nup82.2'](522,713)]),
+             ('Nup159.1_CTD', [po.asym_units['Nup159.1'](1117,1460)]),
+             ('Nup159.2_CTD', [po.asym_units['Nup159.2'](1117,1460)]),
+             ('Nsp1.1_CTD', [po.asym_units['Nsp1.1'](637,823)]),
+             ('Nsp1.2_CTD', [po.asym_units['Nsp1.1'](637,823)]) ]:
+        loc = ihm.location.OutputFileLocation(
+                '../outputs/3_analysis_allEM2D/kmeans_10000_2/'
+                'cluster.0_370/%s.mrc' % fname)
+        for domain in domains:
+            den = ihm.model.LocalizationDensity(file=loc, asym_unit=domain)
+            e.densities.append(den)
+
     model = po.add_model(e.model_group)
     model._is_restrained = False # We have no restraint data for this model
 
