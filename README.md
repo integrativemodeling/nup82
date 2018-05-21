@@ -52,7 +52,7 @@ The modeling protocol will work with a default build of IMP, but for most effect
 
 - `Predictions` : Predictions from COILS/PCOILS, DISOPRED, HeliQuest, Multicoil2, and PSIPRED. Also contains template search results using HHPred.
 
-- `SAXS` : SAXS validation / Best-scoring comparative models filtered by the corresponding SAXS data
+- `SAXS` : SAXS data and validation of the corresponding Nup82 complex fragments
 
 - `template`			                  contains modeling scripts
   
