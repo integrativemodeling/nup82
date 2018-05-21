@@ -7,17 +7,53 @@ is used to model these components using DSS/EDC crosslinks and the electron micr
 The modeling protocol will work with a default build of IMP, but for most effective sampling, IMP should be built with [MPI](https://integrativemodeling.org/2.5.0/doc/ref/namespaceIMP_1_1mpi.html) so that replica exchange can be used.
 
 ## List of files and descriptions:
+
+- `data`		            contains all relevant data 
+   
+   `*.pdb` : Representation PDB for individual domains of the Nup82 complex
+
+   `*.csv` : Cross-links data
+
+   `protein_fasta.*.txt` : Sequence files
+
+  `data/4ycz_3ewe` : Representation PDB for the Nup82 - Nup84 complexes
+  
+  `data/em2d` : EM 2D class averages of the Nup82 complex
+  
+  `data/em2d_without_bg` : EM 2D class averages of the the Nup82 complex (background removed)
+  
+  `data/MODELLER_results` : Comparative model outputs, generated using MODELLER
+  
+  `data/Individual-Models` : Comparative model outputs, generated using MODELLER (with MODELLER scripts)
+
+- `EM2D_Filter` :  contains files for EM 2D filter
+
+   `EM2D_Filter/EM2D-Filter.py` : Script to compute a score for a given model against a set of class averages. 
+
+   `EM2D_Filter/Get-Distribution-Statistics.sh` : Script to analyze the results of the filtering; requires GNUPlot and ImageMagick. 
+
+   `EM2D_Filter/Satisfied-Classes-Count.sh` : Quick script to format the results of the analysis into a summary text file. 
+
+   `EM2D_Filter/Models_Selection_Threshold.py` : Script to select models given a threshold (either a user input or a adaptive threshold).
+
+- `MODELLER` : Comparative models generated using MODELLER (with MODELLER scripts)
+
+- `outputs` : contains resulting structures and output files
+
+- `outputs\prefilter`			                 Selection of 500 good-scoring models ranked by the combined total score.  Also score log files (`*.log`) are included
+
+- `outputs\analysis`			                  contains Clustering scripts and results
+
+- `Predictions` : Predictions from COILS/PCOILS, DISOPRED, HeliQuest, Multicoil2, and PSIPRED. Also contains template search results using HHPred.
+
+- `SAXS` : SAXS validation / Best-scoring comparative models filtered by the corresponding SAXS data
+
+- `template`			                  contains modeling scripts
+  
 1_run_initial_random_EMclass2.sh: script that runs the PMI script 1_modeling_initial_random.py. 
 
-EM2D-Filter.py: Script to compute a score for a given model against a set of class averages. 
+2_run_refinement.sh: script that runs the PMI script 2_modeling_allEM_except11_19.py.
 
-Get-Distribution-Statistics.sh: Script to analyze the results of the filtering; requires GNUPlot and ImageMagick. 
-
-Satisfied-Classes-Count.sh: Quick script to format the results of the analysis into a summary text file. 
-
-Models_Selection_Threshold.py: Script to select models given a threshold (either a user input or a adaptive threshold).
-
-2_run_refinement.sh: script that runs the PMI script 2_modeling_allEM_except11_19.py. 
 
 ## (1) Running the IMP/PMI scripts for the initial stage of modeling
 1) python 1_modeling_initial_random.py -r repeats -out outputdir -em2d class_average -weight em2d_weight
