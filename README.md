@@ -22,10 +22,8 @@ The modeling protocol will work with a default build of IMP, but for most effect
   
   `data/em2d_without_bg` : EM 2D class averages of the the Nup82 complex (background removed)
   
-  `data/MODELLER_results` : Comparative model outputs, generated using MODELLER
+  `data/MODELLER` : Comparative model outputs, generated using MODELLER (using templates of 5CWS and 5C3L)
   
-  `data/Individual-Models` : Comparative model outputs, generated using MODELLER (with MODELLER scripts)
-
 - `EM2D_Filter` :  contains files for EM 2D filter
 
    `EM2D_Filter/EM2D-Filter.py` : Script to compute a score for a given model against a set of class averages. 
@@ -35,8 +33,6 @@ The modeling protocol will work with a default build of IMP, but for most effect
    `EM2D_Filter/Satisfied-Classes-Count.sh` : Quick script to format the results of the analysis into a summary text file. 
 
    `EM2D_Filter/Models_Selection_Threshold.py` : Script to select models given a threshold (either a user input or a adaptive threshold).
-
-- `MODELLER` : Comparative models generated using MODELLER (with MODELLER scripts)
 
 - `outputs` : contains resulting structures and output files
 
@@ -104,4 +100,4 @@ _Testable_: Yes.
 _Parallelizeable_: Yes
 
 _Publications_:
- - J. Fernandez-Martinez, S.J. Kim, Y. Shi, P. Upla, R. Pellarin, M. Gagnon, I.E. Chemmama, J. Wang, I. Nudelman, W. Zhang, R. Williams, W.J. Rice, D.L. Stokes, D. Zenklusen, B.T. Chait, A. Sali, M.P. Rout, [Structure and Function of the Nuclear Pore Complex Cytoplasmic mRNA Export Platform](https://www.ncbi.nlm.nih.gov/pubmed/27839866), Cell, 2016, 167(5), 10.1016/j.cell.2016.10.028.
+ - J. Fernandez-Martinez*, S.J. Kim*, Y. Shi*, P. Upla*, R. Pellarin*, M. Gagnon, I.E. Chemmama, J. Wang, I. Nudelman, W. Zhang, R. Williams, W.J. Rice, D.L. Stokes, D. Zenklusen, B.T. Chait, A. Sali, M.P. Rout, [Structure and Function of the Nuclear Pore Complex Cytoplasmic mRNA Export Platform](https://www.ncbi.nlm.nih.gov/pubmed/27839866), Cell, 2016, 167(5), 10.1016/j.cell.2016.10.028.
