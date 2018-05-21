@@ -40,9 +40,19 @@ The modeling protocol will work with a default build of IMP, but for most effect
 
 - `outputs` : contains resulting structures and output files
 
-- `outputs\prefilter`			                 Selection of 500 good-scoring models ranked by the combined total score.  Also score log files (`*.log`) are included
+   `outputs\1_prefilter` : Selection script of 463 good-scoring models ranked by the combined total score.
 
-- `outputs\analysis`			                  contains Clustering scripts and results
+   `outputs\2_Sampling_Exhaustiveness_test` : "Sampling Exhaustiveness test" results
+
+   `outputs\3_analysis_allEM2D` : Clustering analysis results and scripts
+
+   `outputs\3_analysis_allEM2D\kmeans_10000_2` : Localiazation probability densities and the RMSD distance matrix for 2 clusters (major: cluster.0_370 and minor: cluster.1_93)
+
+   `outputs\4_em2d_single_scores_final35r_best` : Validation of the final Nup82 complex structure using the EM 2D class averages. A representative structure ("225-17.rmf3" and "225-17r_n159nter_n116_removed.pdb") selected in the major cluster (cluster.0_370) was used for validation.
+   
+   `outputs\5_GFP` : Validation of the final Nup82 complex structure using the GFP tags (EM 2D image)
+   
+   `outputs\6_Nup82Nup84` : Modeling of the Nup82 - Nup84 complexes
 
 - `Predictions` : Predictions from COILS/PCOILS, DISOPRED, HeliQuest, Multicoil2, and PSIPRED. Also contains template search results using HHPred.
 
