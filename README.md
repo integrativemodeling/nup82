@@ -24,6 +24,13 @@ The modeling protocol will work with a default build of IMP, but for most effect
   
   `data/MODELLER` : Comparative model outputs, generated using MODELLER (using templates of 5CWS and 5C3L)
   
+cc_tr1: Nsp1_637_727 + Nup82_522_612 + Nup159_1211_1321 (using 5CWS as templates)
+
+cc_tr2: Nsp1_742_778 + Nup82_625_669 + Nup159_1332_1372 (using 5CWS as templates)
+
+cc_tr3: Nsp1_788_823 + Nup82_678_713 + Nup159_1382_1412 (using 5CWS as templates)
+
+  
 - `EM2D_Filter` :  contains files for EM 2D filter
 
    `EM2D_Filter/EM2D-Filter.py` : Script to compute a score for a given model against a set of class averages. 
