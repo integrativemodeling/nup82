@@ -5,15 +5,15 @@ Nup82     ENQLEIFTDISKEFLQRIVKAQT---------------------------------------------
 
  _aln.p   70        80        90       100       110       120       130
 5cws_E    PNFIPVLCSGFPSIVARLMLQRRVITEFNNKLHQINASLDAILSRHDLDHTVRAFNARRRHAELSRRC 
-Nup82     ---------LGVSIHNRIHEQQFEL------------------------------------------- 
- _consrvd             **  *   *
+Nup82     ---------LGVSIHNRIHEQQFELTRQLQSTCKIISKDDDLRRKF-EAQNKKWDAQLSRQSELMERF 
+ _consrvd             **  *   *    *        *    *                   *  **  *
 
  _aln.pos  140       150       160       170       180       190       200
-5cws_E    LHLAARVQVLRNRGYALSGDEDELKQKLQQIDKTLNDPAQGSRLEELWSRLIVLRGYAEDLKDQINQA 
-Nup82     -------------------------------------------------------------------- 
- _consrvd
+5cws_E    LHLAARVQVLR----NRGYALSGDEDELKQKLQQIDKTLNDPAQGSRLEELWSRLIVLRGYAEDLKDQ 
+Nup82     SKLSKKLSQIAESNKFKEKKISHGEMKWFKEIRNQILQF--NSFVHSQKSLQQDLSYLKSELTRIEAE 
+ _consrvd   *                  *  *                         *   *  *
 
  _aln.pos    210       220       230       240       250
-5cws_E    GITESDGLGEEIEAKAKKILEDYDKQLQHLKKQVEEAKKDFEEWEKQ 
-Nup82     ----------------------------------------------- 
- _consrvd
+5cws_E    INQAGITESDGLGEEIEAKAKKILEDYDKQLQHLKKQVEEAKKDFEEWEKQ 
+Nup82     TIKVDK-----KSQNEWDELRKMLEIDSKIIKECNEELLQVSQEFTTKTQ- 
+ _consrvd                      * **   *               *

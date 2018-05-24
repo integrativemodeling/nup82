@@ -1,6 +1,7 @@
 from modeller import *
 from modeller.automodel import *
 from modeller.scripts import complete_pdb
+import sys
 
 import fnmatch
 import os
@@ -10,8 +11,8 @@ env = environ()
 
 #It begins from here
 aln = alignment(env)
-#aln.append(file='Nup82_long.ali')
-aln.append(file='Nup82_short.ali')
+aln.append(file='Nup82_long.ali')
+#aln.append(file='Nup82_short.ali')
 aln.write(file='Nup82_f.ali', alignment_format='PIR')
 aln.write(file='Nup82_f.pap', alignment_format='PAP')
 aln.id_table(matrix_file='Nup82_f.mat')
@@ -37,5 +38,7 @@ a = MyModel(env,
 
 a.starting_model = 1
 a.ending_model = 20
+if '--test' in sys.argv:
+    a.ending_model = 1
 
 a.make()

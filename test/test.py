@@ -9,6 +9,21 @@ TOPDIR = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 
 class Tests(unittest.TestCase):
 
+    def run_modeller_script(self, script_dir, script_name):
+        """Run a Modeller script"""
+        os.chdir(os.path.join(TOPDIR, 'data', 'MODELLER',
+                              'MODELLER_scripts_5CWS', script_dir))
+        # Run script
+        p = subprocess.check_call(["python", script_name, "--test"])
+
+    def check_modeller_model(self, model_name, resrng):
+        """Test the model output from Modeller"""
+        # Make sure PDB was produced with the requested residue range
+        with open('%s.B99990001.pdb' % model_name) as fh:
+            pdb_lines = [x for x in fh.readlines() if x.startswith('ATOM')]
+        rng = (int(pdb_lines[0][22:26]), int(pdb_lines[-1][22:26]))
+        self.assertEqual(rng, resrng)
+
     def test_simple(self):
         """Test model building"""
         os.chdir(os.path.join(TOPDIR, 'template'))
@@ -16,6 +31,24 @@ class Tests(unittest.TestCase):
                      "-r", "1000", "-out", "output",
                      "-em2d", "../data/em2d/2.pgm", "-weight", "10000.0"])
         # todo: assert outputs
+
+    def test_nsp1(self):
+        """Test generation of comparative models for Nsp1"""
+        self.run_modeller_script('Nsp1', 'Build-Nsp1.py')
+        self.check_modeller_model('NS1', (637, 727))
+        self.check_modeller_model('NS2', (742, 778))
+        self.check_modeller_model('NS3', (788, 823))
+
+    def test_nup159(self):
+        """Test generation of comparative model for Nup159"""
+        self.run_modeller_script('Nup159', 'Build-Nup159.py')
+        self.check_modeller_model('Nup159', (1211, 1412))
+
+    def test_nup82(self):
+        """Test generation of comparative models for Nup182"""
+        self.run_modeller_script('Nup82', 'Build-n82.py')
+        self.check_modeller_model('Nup82', (522, 713))
+
 
 if __name__ == '__main__':
     unittest.main()
