@@ -49,6 +49,21 @@ class Tests(unittest.TestCase):
         self.run_modeller_script('Nup82', 'Build-n82.py')
         self.check_modeller_model('Nup82', (522, 713))
 
+    def test_cc_tr1(self):
+        """Test generation of comparative models for coiled coil complex 1"""
+        self.run_modeller_script('cc_tr1', 'cc_tr1.py')
+        self.check_modeller_model('cc_tr1', (637, 612))
+
+    def test_cc_tr2(self):
+        """Test generation of comparative models for coiled coil complex 2"""
+        self.run_modeller_script('cc_tr2', 'cc_tr2.py')
+        self.check_modeller_model('cc_tr2', (742, 669))
+
+    def test_cc_tr3(self):
+        """Test generation of comparative models for coiled coil complex 3"""
+        self.run_modeller_script('cc_tr3', 'cc_tr3.py')
+        self.check_modeller_model('cc_tr3', (788, 713))
+
 
 if __name__ == '__main__':
     unittest.main()
