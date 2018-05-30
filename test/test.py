@@ -32,6 +32,19 @@ class Tests(unittest.TestCase):
                      "-em2d", "../data/em2d/2.pgm", "-weight", "10000.0"])
         # todo: assert outputs
 
+    def test_mmcif(self):
+        """Test generation of mmCIF output"""
+        os.chdir(os.path.join(TOPDIR, 'template'))
+        if os.path.exists("nup82.cif"):
+            os.unlink("nup82.cif")
+        p = subprocess.check_call(["python", "1_modeling_initial_random.py",
+                     "--dry-run", "-em2d", "../data/em2d/2.pgm",
+                     "-weight", "10000.0", "--mmcif=nup82.cif"])
+        # Check size of output file
+        with open("nup82.cif") as fh:
+            wcl = len(fh.readlines())
+        self.assertEqual(wcl, 46787)
+
     def test_nsp1(self):
         """Test generation of comparative models for Nsp1"""
         self.run_modeller_script('Nsp1', 'Build-Nsp1.py')
