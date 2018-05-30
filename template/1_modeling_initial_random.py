@@ -22,6 +22,8 @@ import IMP.pmi.restraints.basic
 import IMP.pmi.restraints.proteomics
 import IMP.pmi.mmcif
 import ihm
+import ihm.analysis
+import ihm.dataset
 #import representation_nup82
 import IMP.pmi.representation
 import IMP.pmi.macros
@@ -29,6 +31,7 @@ import IMP.pmi.restraints
 import IMP.pmi.tools
 import IMP.pmi.output
 import IMP.pmi.samplers
+import saxs
 import random
 
 import os
@@ -735,5 +738,17 @@ if inputs.mmcif:
 
     model = po.add_model(e.model_group)
     model._is_restrained = False # We have no restraint data for this model
+
+    # Add SAXS datasets (for validation)
+    f = saxs.SAXSFits(po)
+    validation_datasets = list(f.add_from_csv(model))
+
+    # Add validation step to the protocol
+    analysis = ihm.analysis.Analysis()
+    analysis.steps.append(ihm.analysis.ValidationStep(
+                   assembly=po.system.complete_assembly,
+                   dataset_group=ihm.dataset.DatasetGroup(validation_datasets),
+                   feature='other', num_models_begin=1, num_models_end=1))
+    model.protocol.analyses.append(analysis)
 
     po.flush()
