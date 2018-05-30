@@ -35,6 +35,10 @@ import saxs
 import random
 
 import os
+import sys
+
+sys.path.append('../util/')
+import make_archive
 
 
 #####################################################
@@ -150,6 +154,19 @@ if inputs.mmcif:
                        'cytoplasmic mRNA export platform, Nup82')
     # Add publication
     po.system.citations.append(ihm.Citation.from_pubmed_id(27839866))
+
+    # Point to repositories where files are deposited
+    zenodo_id = '1231518'
+    doi = '10.5281/zenodo.' + zenodo_id
+    url_top = 'https://zenodo.org/record/%s/files' % zenodo_id
+    for subdir, zipname in make_archive.ARCHIVES.items():
+        simo.add_metadata(ihm.location.Repository(
+              doi=doi, root="../%s" % subdir,
+              url="%s/%s.zip" % (url_top, zipname),
+              top_directory=os.path.basename(subdir)))
+        simo.add_metadata(ihm.location.Repository(
+              doi=doi, root="..", url="%s/nup82-master.zip" % url_top,
+              top_directory="nup82-master"))
 
 
 rbmaxtrans = 2.00
