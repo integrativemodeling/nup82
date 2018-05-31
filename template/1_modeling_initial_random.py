@@ -168,6 +168,38 @@ if inputs.mmcif:
               doi=doi, root="..", url="%s/nup82-master.zip" % url_top,
               top_directory="nup82-master"))
 
+# We used HHpred to detect remote homologs for some input subunits
+simo.add_metadata(ihm.Software(
+          name='HHpred', classification='protein homology detection',
+          description='Protein homology detection by HMM-HMM comparison',
+          version='2.0.16',
+          location='https://toolkit.tuebingen.mpg.de/hhpred'))
+# We used PSIPRED to predict secondary structure for subunits
+simo.add_metadata(ihm.Software(
+          name='PSIPRED', classification='secondary structure prediction',
+          description='Protein secondary structure prediction based on '
+                      'position-specific scoring matrices',
+          version='4.0',
+          location='http://bioinf.cs.ucl.ac.uk/psipred/'))
+# We used DISOPRED to predict (and remove) disordered regions in the subunits
+simo.add_metadata(ihm.Software(
+          name='DISOPRED', classification='disorder prediction',
+          description='prediction of protein disorder', version=3,
+          location='http://bioinf.cs.ucl.ac.uk/psipred/?disopred=1'))
+# We used DomPred to predict domains
+simo.add_metadata(ihm.Software(
+          name='DomPred', classification='domain prediction',
+          description='prediction of protein domains',
+          location='http://bioinf.cs.ucl.ac.uk/psipred/?dompred=1'))
+# We used COILS/PCOILS and Multicoil2 to predict coiled-coil regions
+simo.add_metadata(ihm.Software(
+          name='COILS/PCOILS', classification='coiled-coil prediction',
+          description='prediction of protein coiled-coil regions',
+          location='https://toolkit.tuebingen.mpg.de/pcoils'))
+simo.add_metadata(ihm.Software(
+          name='Multicoil2', classification='coiled-coil prediction',
+          description='prediction of protein coiled-coil regions',
+          location='http://groups.csail.mit.edu/cb/multicoil2/cgi-bin/multicoil2.cgi'))
 
 rbmaxtrans = 2.00
 fbmaxtrans = 3.00
