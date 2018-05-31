@@ -43,7 +43,7 @@ class Tests(unittest.TestCase):
         # Check size of output file
         with open("nup82.cif") as fh:
             wcl = len(fh.readlines())
-        self.assertEqual(wcl, 46787)
+        self.assertEqual(wcl, 46943)
 
     def test_nsp1(self):
         """Test generation of comparative models for Nsp1"""
