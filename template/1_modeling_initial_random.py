@@ -766,8 +766,7 @@ if inputs.mmcif:
         simo.set_coordinates_from_rmf(c,
                 '../outputs/4_em2d_single_scores_final35r_best/225-17.rmf3', 0,
                 force_rigid_update=True)
-    # todo: fill in correct numbers
-    pp = po._add_simple_postprocessing(num_models_begin=100000,
+    pp = po._add_simple_postprocessing(num_models_begin=10000,
                                        num_models_end=463)
 
     r = ihm.location.Repository(doi=doi, url="%s/cluster0.dcd" % url_top)
@@ -798,6 +797,14 @@ if inputs.mmcif:
 
     model = po.add_model(e.model_group)
     model._is_restrained = False # We have no restraint data for this model
+
+    # Correct number of output models to account for multiple runs
+    # todo: step 1 isn't quite right because it shows modeling with a single
+    # em2D image; in fact we ran multiple "step 1"s, each with a different image
+    model.protocol.steps[1].num_models_end = 1350000
+    # todo: add em2D filter between steps 1 and 2
+    model.protocol.steps[2].num_models_begin = 1350000
+    model.protocol.steps[2].num_models_end = 10000
 
     # Add SAXS datasets (for validation)
     f = saxs.SAXSFits(po)
