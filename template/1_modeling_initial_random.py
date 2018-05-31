@@ -723,6 +723,44 @@ mc2.execute_macro()
 print("\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank)
 
 if inputs.mmcif:
+    # Add refinement step with all 2D EM data
+    # (see 2_modeling_allEM_except11_19.py)
+    # note that we also exclude image #2 because we've already added that above
+    images = ["../data/em2d/%d.pgm" % i for i in range(23)
+                                        if i not in (2,11,19)]
+    em2d = em2d_nup82.ElectronMicroscopy2D(simo, images, resolution = 1.0,
+                                           pixel_size = 3.23,
+                                           image_resolution = 35.0,
+                                           projection_number = 100,
+                                           n_components = 2)
+    em2d.add_to_model()
+    em2d.set_weight(em2d_weight)
+    outputobjects.append(em2d)
+    sf = IMP.core.RestraintsScoringFunction(IMP.pmi.tools.get_restraint_set(m))
+    mc3 = IMP.pmi.macros.ReplicaExchange0(m, simo,
+                                    monte_carlo_sample_objects = sampleobjects,
+                                    output_objects = outputobjects,
+                                    crosslink_restraints = [xl1, xl2, xl3],
+                                    monte_carlo_temperature = 1.0,
+                                    replica_exchange_minimum_temperature = 1.0,
+                                    replica_exchange_maximum_temperature = 2.5,
+                                    number_of_best_scoring_models = 500,
+                                    monte_carlo_steps = 10,
+                                    number_of_frames = int(inputs.nrepeats),
+                                    write_initial_rmf = True,
+                                    initial_rmf_name_suffix = "initial",
+                                    stat_file_name_suffix = "stat",
+                                    best_pdb_name_suffix = "model",
+                                    do_clean_first = True,
+                                    do_create_directories = True,
+                                    global_output_directory = inputs.folder_output,
+                                    rmf_dir = "rmfs/",
+                                    best_pdb_dir = "pdbs/",
+                                    replica_stat_file_suffix = "stat_replica",
+                                    test_mode=simo.dry_run,
+                                    replica_exchange_object = rex1)
+    mc3.execute_macro()
+
     # Read in final model
     for c in simo.get_component_names():
         simo.set_coordinates_from_rmf(c,
