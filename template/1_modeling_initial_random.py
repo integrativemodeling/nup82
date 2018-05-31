@@ -156,7 +156,7 @@ if inputs.mmcif:
     po.system.citations.append(ihm.Citation.from_pubmed_id(27839866))
 
     # Point to repositories where files are deposited
-    zenodo_id = '1231518'
+    zenodo_id = '1256259'
     doi = '10.5281/zenodo.' + zenodo_id
     url_top = 'https://zenodo.org/record/%s/files' % zenodo_id
     for subdir, zipname in make_archive.ARCHIVES.items():
