@@ -773,8 +773,9 @@ if inputs.mmcif:
     r = ihm.location.Repository(doi=doi, url="%s/cluster0.dcd" % url_top)
     f = ihm.location.OutputFileLocation(path='.', repo=r,
                 details="All ensemble structures for cluster 0")
+    # precision of 9.0 is from Table 1
     e = po._add_simple_ensemble(pp, name="Cluster 0", num_models=370,
-                                drmsd=None, num_models_deposited=1,
+                                drmsd=9.0, num_models_deposited=1,
                                 localization_densities={}, ensemble_file=f)
 
     # Add localization densities
