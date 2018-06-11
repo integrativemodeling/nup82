@@ -37,9 +37,13 @@ class Tests(unittest.TestCase):
         os.chdir(os.path.join(TOPDIR, 'template'))
         if os.path.exists("nup82.cif"):
             os.unlink("nup82.cif")
+        # Potentially override methods that need network access
+        env = os.environ.copy()
+        env['PYTHONPATH'] = os.path.join(TOPDIR, 'test', 'mock') \
+                            + ':' + env.get('PYTHONPATH', '')
         p = subprocess.check_call(["python", "1_modeling_initial_random.py",
                      "--dry-run", "-em2d", "../data/em2d/2.pgm",
-                     "-weight", "10000.0", "--mmcif=nup82.cif"])
+                     "-weight", "10000.0", "--mmcif=nup82.cif"], env=env)
         # Check size of output file
         with open("nup82.cif") as fh:
             wcl = len(fh.readlines())
