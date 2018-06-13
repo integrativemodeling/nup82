@@ -850,4 +850,9 @@ if inputs.mmcif:
                    feature='other', num_models_begin=1, num_models_end=1))
     model.protocol.analyses.append(analysis)
 
+    # Correct crosslinker type from skDSS to DSS
+    for r in po.system.restraints:
+        if hasattr(r, 'linker_type') and r.linker_type == 'skDSS':
+            r.linker_type = 'DSS'
+
     po.flush()
