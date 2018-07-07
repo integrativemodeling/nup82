@@ -1,4 +1,5 @@
 import os
+import sys
 import csv
 import re
 import glob
@@ -6,6 +7,13 @@ import ihm.location
 import ihm.dataset
 
 saxs_dir = '../SAXS'
+
+if sys.version_info[0] >= 3:
+    def open_csv(fname):
+        return open(fname, newline='')
+else:
+    def open_csv(fname):
+        return open(fname, 'rb')
 
 class SAXSFits(object):
     """Parse the SAXS csv file and add suitable fit data to the mmCIF file"""
@@ -15,7 +23,7 @@ class SAXSFits(object):
         self.po = po
 
     def add_from_csv(self, model):
-        with open(os.path.join(saxs_dir, 'Table6_SAXS.csv'), 'rb') as fh:
+        with open_csv(os.path.join(saxs_dir, 'Table6_SAXS.csv')) as fh:
             for row in csv.DictReader(fh):
                 # 24367 was not used in publication due to low concentration
                 if row['FoXS fit score (chi value)'] \
