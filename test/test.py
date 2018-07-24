@@ -4,6 +4,7 @@ import unittest
 import os
 import sys
 import subprocess
+import ihm.reader
 
 TOPDIR = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 
@@ -44,10 +45,60 @@ class Tests(unittest.TestCase):
         p = subprocess.check_call(["python", "1_modeling_initial_random.py",
                      "--dry-run", "-em2d", "../data/em2d/2.pgm",
                      "-weight", "10000.0", "--mmcif=nup82.cif"], env=env)
-        # Check size of output file
-        with open("nup82.cif") as fh:
-            wcl = len(fh.readlines())
-        self.assertTrue(wcl >= 46080)
+        # Check output file
+        self._check_mmcif_file('nup82.cif')
+
+    def _check_mmcif_file(self, fname):
+        with open(fname) as fh:
+            s, = ihm.reader.read(fh)
+        self.assertEqual(len(s.citations), 1)
+        self.assertEqual(s.citations[0].doi, '10.1016/j.cell.2016.10.028')
+        self.assertEqual(len(s.software), 9)
+        self.assertEqual(len(s.orphan_starting_models), 30)
+        # Should be a single state, of one model
+        self.assertEqual(len(s.state_groups), 1)
+        self.assertEqual(len(s.state_groups[0]), 1)
+        self.assertEqual(len(s.state_groups[0][0]), 1)
+        model = s.state_groups[0][0][0][0]
+        self.assertEqual(len(model._atoms), 0)
+        self.assertEqual(len(model._spheres), 3274)
+        # Should be 1 ensemble (cluster)
+        self.assertEqual([e.num_models for e in s.ensembles], [370])
+        # Check localization densities
+        self.assertEqual([len(e.densities) for e in s.ensembles], [10])
+        self.assertEqual([len(e.sequence) for e in s.entities],
+                         [92, 713, 1460, 823, 1113])
+        self.assertEqual([a.details for a in s.asym_units],
+                         ['Dyn2.1', 'Dyn2.2', 'Nup82.1', 'Nup82.2', 'Nup159.1',
+                          'Nup159.2', 'Nsp1.1', 'Nsp1.2', 'Nup116.1',
+                          'Nup116.2'])
+        # 27 restraints - 3 crosslinks, 21 EM2D images, 3 SAXS profiles
+        self.assertEqual(len(s.restraints), 27)
+        xl1, xl2, xl3 = s.restraints[:3]
+        self.assertEqual(xl1.linker_type, 'DSS')
+        self.assertEqual(len(xl1.experimental_cross_links), 240)
+        self.assertEqual(len(xl1.cross_links), 942)
+        self.assertEqual(xl1.dataset.location.path,
+                'data/XL_wtNup82_DSS_standardized_no_FG_2copies_Ambiguity3.csv')
+        # No final psi/sigma values available
+        self.assertEqual(sum(len(x.fits) for x in xl1.cross_links), 0)
+
+        self.assertEqual(xl2.linker_type, 'DSS')
+        self.assertEqual(xl3.linker_type, 'EDC')
+
+        em2d_rsrs = s.restraints[3:-3]
+        for em2d in em2d_rsrs:
+            # We only know the resolution
+            self.assertAlmostEqual(em2d.image_resolution, 35.0, places=1)
+            self.assertEqual(em2d.number_raw_micrographs, None)
+            self.assertEqual(len(em2d.fits), 0)
+
+        sas_rsrs = s.restraints[-3:]
+        for sas in sas_rsrs:
+            self.assertEqual(sas.segment, False)
+            self.assertEqual(sas.fitting_method, "FoXS")
+            self.assertEqual(sas.multi_state, False)
+            self.assertEqual(sas.number_of_gaussians, None)
 
     def test_nsp1(self):
         """Test generation of comparative models for Nsp1"""
