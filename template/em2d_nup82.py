@@ -1,4 +1,4 @@
-"""@namespace IMP.pmi.restraints.em2d
+"""@namespace IMP.pmi1.restraints.em2d
 Restraints for handling electron microscopy images.
 """
 
@@ -8,7 +8,7 @@ import IMP.core
 import IMP.algebra
 import IMP.atom
 import IMP.em2d
-import IMP.pmi.tools
+import IMP.pmi1.tools
 import ihm.location
 import ihm.dataset
 
@@ -59,14 +59,14 @@ class ElectronMicroscopy2D():
         ################################
         # Dyn2.1
         ################################
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Dyn2.1")
         for p in particles:
             ps.append(p)
 
         # Dyn2.2
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Dyn2.2")
         for p in particles:
@@ -76,14 +76,14 @@ class ElectronMicroscopy2D():
         ################################
         # Nup82.1
         ################################
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Nup82.1")
         for p in particles:
             ps.append(p)
 
         # Nup82.2
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Nup82.2")
         for p in particles:
@@ -93,7 +93,7 @@ class ElectronMicroscopy2D():
         ################################
         # Nup159.1
         ################################
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Nup159.1")
         for p in particles:
@@ -103,7 +103,7 @@ class ElectronMicroscopy2D():
                 ps.append(p)
 
         # Nup159.2
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Nup159.2")
         for p in particles:
@@ -116,7 +116,7 @@ class ElectronMicroscopy2D():
         ################################
         # Nsp1.1
         ################################
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Nsp1.1")
         for p in particles:
@@ -127,7 +127,7 @@ class ElectronMicroscopy2D():
                 ps.append(p)
 
         # Nsp1.2
-        particles = IMP.pmi.tools.select(representation,
+        particles = IMP.pmi1.tools.select(representation,
                                         resolution=resolution,
                                         name="Nsp1.2")
         for p in particles:
@@ -145,7 +145,7 @@ class ElectronMicroscopy2D():
 
         """
         # IMP.atom.get_by_type
-        particles = IMP.pmi.tools.select(
+        particles = IMP.pmi1.tools.select(
             representation,
             resolution=resolution)
         #print particles
@@ -165,7 +165,7 @@ class ElectronMicroscopy2D():
         self.label = label
 
     def add_to_model(self):
-        IMP.pmi.tools.add_restraint_to_model(self.m, self.rs)
+        IMP.pmi1.tools.add_restraint_to_model(self.m, self.rs)
 
     def get_restraint(self):
         return self.rs
@@ -235,7 +235,7 @@ class ElectronMicroscopy2D_FFT():
         em2d_restraint.set_name("em2d_restraint")
 
         # IMP.atom.get_by_type
-        particles = IMP.pmi.tools.select(
+        particles = IMP.pmi1.tools.select(
             representation,
             resolution=resolution)
         print ("len(particles) = ", len(particles))
@@ -256,7 +256,7 @@ class ElectronMicroscopy2D_FFT():
         self.label = label
 
     def add_to_model(self):
-        IMP.pmi.tools.add_restraint_to_model(self.m, self.rs)
+        IMP.pmi1.tools.add_restraint_to_model(self.m, self.rs)
 
     def get_restraint(self):
         return self.rs

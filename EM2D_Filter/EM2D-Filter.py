@@ -6,14 +6,14 @@ import IMP.core
 import IMP.algebra
 import IMP.atom
 import IMP.container
-import IMP.pmi.restraints.em
-import IMP.pmi.restraints.em2d
-import IMP.pmi.restraints.basic
-import IMP.pmi.representation
-import IMP.pmi.tools
-import IMP.pmi.samplers
-import IMP.pmi.output
-import IMP.pmi.macros
+import IMP.pmi1.restraints.em
+import IMP.pmi1.restraints.em2d
+import IMP.pmi1.restraints.basic
+import IMP.pmi1.representation
+import IMP.pmi1.tools
+import IMP.pmi1.samplers
+import IMP.pmi1.output
+import IMP.pmi1.macros
 import os
 import sys
 

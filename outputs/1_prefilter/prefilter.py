@@ -1,6 +1,6 @@
 import IMP
-import IMP.pmi
-#import IMP.pmi.macros
+import IMP.pmi1
+#import IMP.pmi1.macros
 import sys
 
 #####################################################
@@ -53,14 +53,14 @@ prefiltervalue = float(inputs.prefiltervalue)                   # prefilter the 
 # initialize the macro
 #####################################################
 import macros_n82
-#import IMP.pmi.macros
+#import IMP.pmi1.macros
 
 model=IMP.Model()
 
 # modeling1-20 and modeling2001-2020; starting from modeling2_0.rmf3 (based on the chef9 model)
 # modeling200601-200640; starting from modeling2006_0.rmf3 (based on the new chef13 modeling2006, started from the random coordinates)
 
-#mc=IMP.pmi.macros.AnalysisReplicaExchange0(model,
+#mc=IMP.pmi1.macros.AnalysisReplicaExchange0(model,
 mc=macros_n82.AnalysisReplicaExchange0(model,
                                         stat_file_name_suffix="stat",     # don't change
                                         merge_directories=["../modeling1_lyre",

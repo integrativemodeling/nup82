@@ -12,20 +12,20 @@ import IMP.atom
 import IMP.container
 
 #import crosslinking_nup82
-import IMP.pmi.restraints.crosslinking
-import IMP.pmi.restraints.stereochemistry
-#import IMP.pmi.restraints.em
+import IMP.pmi1.restraints.crosslinking
+import IMP.pmi1.restraints.stereochemistry
+#import IMP.pmi1.restraints.em
 import em2d_nup82
-#import IMP.pmi.restraints.em2d
-import IMP.pmi.restraints.basic
-import IMP.pmi.restraints.proteomics
+#import IMP.pmi1.restraints.em2d
+import IMP.pmi1.restraints.basic
+import IMP.pmi1.restraints.proteomics
 #import representation_nup82
-import IMP.pmi.representation
-import IMP.pmi.macros
-import IMP.pmi.restraints
-import IMP.pmi.tools
-import IMP.pmi.output
-import IMP.pmi.samplers
+import IMP.pmi1.representation
+import IMP.pmi1.macros
+import IMP.pmi1.restraints
+import IMP.pmi1.tools
+import IMP.pmi1.output
+import IMP.pmi1.samplers
 import random
 
 import os
@@ -114,7 +114,7 @@ print inputs
 # setting up topology
 #####################################################
 m = IMP.Model()
-simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
+simo = IMP.pmi1.representation.Representation(m,upperharmonic=True,disorderedlength=False)
 #simo = representation_nup82.Representation(m,upperharmonic=True,disorderedlength=False)
 
 
@@ -252,7 +252,7 @@ domains = \
  ("Sec13",    "Sec13",      0.95,  sec13_fastafile,           "Sec13",   sec13_pdbfile,                "G",  (  1, 297,0),   True,         beadsize20,     0,     [0],            3,               None,            None, [0])
 ]
 
-bm1 = IMP.pmi.macros.BuildModel1(simo)
+bm1 = IMP.pmi1.macros.BuildModel1(simo)
 #bm1.set_gmm_models_directory(datadirectory + "em_gmm_model/")
 
 if (inputs.rmf_input is not None) :
@@ -304,7 +304,7 @@ sampleobjects.append(simo)
 # Restraints setup
 # Excluded Volume restraint
 #####################################################
-ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo, resolution = res_ev)
+ev = IMP.pmi1.restraints.stereochemistry.ExcludedVolumeSphere(simo, resolution = res_ev)
 ev.add_to_model()
 outputobjects.append(ev)
 print(ev.get_output())
@@ -315,7 +315,7 @@ print "ExcludedVolumeSphere !!\n"
 # Restraints setup
 # External Barrier restraint
 #####################################################
-eb = IMP.pmi.restraints.basic.ExternalBarrier(simo, radius = 500)
+eb = IMP.pmi1.restraints.basic.ExternalBarrier(simo, radius = 500)
 eb.add_to_model()
 outputobjects.append(eb)
 print(eb.get_output())
@@ -334,11 +334,11 @@ columnmap["Residue2"]=3
 columnmap["IDScore"]=4
 columnmap["XLUniqueID"]=5
 
-ids_map=IMP.pmi.tools.map()
+ids_map=IMP.pmi1.tools.map()
 ids_map.set_map_element(1.0,1.0)
 
 if (True):
-    xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+    xl1 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                        '../data_nup84/yeast_Nup84_DSS.new.dat',
                                        length=21.0,
                                        slope=0.01,
@@ -354,7 +354,7 @@ if (True):
     psi.set_scale(0.05)
 
 
-    xl2 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+    xl2 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                        '../data_nup84/EDC_XL_122013.new.dat',
                                        length=16.0,
                                        slope=0.01,
@@ -382,14 +382,14 @@ columnmap["Residue2"] = "Residue 2"
 columnmap["IDScore"] = "p value"
 columnmap["XLUniqueID"] = "XLUniqueID"
 
-ids_map = IMP.pmi.tools.map()
+ids_map = IMP.pmi1.tools.map()
 ids_map.set_map_element(1.0, 1.0)
 
 if (False):
     #----------------------------------------------------
     # wild type ScNup82 complex DSS XL data
     #----------------------------------------------------
-    xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+    xl1 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                                         '../data/XL_wtNup82_DSS_standardized_no_FG_2copies_Ambiguity3.csv',
                                                         length = 21.0,
                                                         slope = 0.00,
@@ -411,7 +411,7 @@ if (False):
     #----------------------------------------------------
     # wild type SkNup82 complex DSS XL data
     #----------------------------------------------------
-    xl2 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+    xl2 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                                         '../data/XL_skNup82_DSS_standardized_equiv_no_FG_2copies_Ambiguity3.csv',
                                                         length = 21.0,
                                                         slope = 0.00,
@@ -433,7 +433,7 @@ if (False):
     #----------------------------------------------------
     # wild type ScNup82 complex EDC XL data
     #----------------------------------------------------
-    xl3 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+    xl3 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                                         '../data/XL_wtNup82_EDC_standardized_no_FG_2copies_Ambiguity3.csv',
                                                         length = 16.0,
                                                         slope = 0.00,
@@ -461,7 +461,7 @@ if (False):
     xl_cliques_psi = 1.0
     xl_cliques_sigma = 5.0
     
-    xl4 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+    xl4 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                                         '../data/XL_cliques_2copies.csv',
                                                         length = 10.0,
                                                         slope = 0.00,
@@ -496,42 +496,42 @@ if (True):
     dist_max = 30.0
     dr_weight = 100.0
     
-    dr1 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1417,1417,"Nup159.1"), (1417,1417,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+    dr1 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(1417,1417,"Nup159.1"), (1417,1417,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr1.add_to_model()
     dr1.set_label("Nup159_1417-1417")
     dr1.set_weight(dr_weight)
     outputobjects.append(dr1)
     print(dr1.get_output())
 
-    dr2 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1432,1432,"Nup159.1"), (1432,1432,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+    dr2 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(1432,1432,"Nup159.1"), (1432,1432,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr2.add_to_model()
     dr2.set_label("Nup159_1432-1432")
     dr2.set_weight(dr_weight)
     outputobjects.append(dr2)
     print(dr2.get_output())
         
-    dr3 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1384,1384,"Nup159.1"), (1384,1384,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+    dr3 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(1384,1384,"Nup159.1"), (1384,1384,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr3.add_to_model()
     dr3.set_label("Nup159_1384-1384")
     dr3.set_weight(dr_weight)
     outputobjects.append(dr3)
     print(dr3.get_output())
 
-    dr4 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1414,1414,"Nup159.1"), (1414,1414,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+    dr4 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(1414,1414,"Nup159.1"), (1414,1414,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr4.add_to_model()
     dr4.set_label("Nup159_1414-1414")
     dr4.set_weight(dr_weight)
     outputobjects.append(dr4)
     print(dr4.get_output())
 
-    dr5 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1387,1387,"Nup159.1"), (1387,1387,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+    dr5 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(1387,1387,"Nup159.1"), (1387,1387,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr5.add_to_model()
     dr5.set_label("Nup159_1387-1387")
     dr5.set_weight(dr_weight)
     outputobjects.append(dr5)
     print(dr5.get_output())
     
-    dr6 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(517,517,"Nup82.1"), (517,517,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+    dr6 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(517,517,"Nup82.1"), (517,517,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
     dr6.add_to_model()
     dr6.set_label("Nup82_517-517")
     dr6.set_weight(dr_weight)
@@ -541,21 +541,21 @@ if (True):
     # by Ed Hurt
     if (False):
         """
-        dr21 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(1343,1343,"Nup159.1"), (1343,1343,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        dr21 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(1343,1343,"Nup159.1"), (1343,1343,"Nup159.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr21.add_to_model()
         dr21.set_label("Nup159_1343-1343")
         dr21.set_weight(dr_weight)
         outputobjects.append(dr21)
         print(dr21.get_output())
         
-        dr22 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(541,541,"Nup82.1"), (541,541,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        dr22 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(541,541,"Nup82.1"), (541,541,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr22.add_to_model()
         dr22.set_label("Nup82_541-541")
         dr22.set_weight(dr_weight)
         outputobjects.append(dr22)
         print(dr22.get_output())
         
-        d23 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(580,580,"Nup82.1"), (580,580,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        d23 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(580,580,"Nup82.1"), (580,580,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         d23.add_to_model()
         d23.set_label("Nup82_580-580")
         d23.set_weight(dr_weight)
@@ -573,28 +573,28 @@ if (True):
         dist_max = 35.0
         dr_weight = 10.0
         
-        dr7 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(649,649,"Nup82.1"), (692,692,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        dr7 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(649,649,"Nup82.1"), (692,692,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr7.add_to_model()
         dr7.set_label("Nup82_649-692a")
         dr7.set_weight(dr_weight)
         outputobjects.append(dr7)
         print(dr7.get_output())
 
-        dr8 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(649,649,"Nup82.2"), (692,692,"Nup82.1"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        dr8 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(649,649,"Nup82.2"), (692,692,"Nup82.1"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr8.add_to_model()
         dr8.set_label("Nup82_649-692b")
         dr8.set_weight(dr_weight)
         outputobjects.append(dr8)
         print(dr8.get_output())
 
-        dr9 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(541,541,"Nup82.1"), (569,569,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        dr9 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(541,541,"Nup82.1"), (569,569,"Nup82.2"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr9.add_to_model()
         dr9.set_label("Nup82_541-569a")
         dr9.set_weight(dr_weight)
         outputobjects.append(dr9)
         print(dr9.get_output())
 
-        dr10 = IMP.pmi.restraints.basic.DistanceRestraint(simo,(541,541,"Nup82.2"), (569,569,"Nup82.1"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        dr10 = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(541,541,"Nup82.2"), (569,569,"Nup82.1"), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr10.add_to_model()
         dr10.set_label("Nup82_541-569b")
         dr10.set_weight(dr_weight)
@@ -619,7 +619,7 @@ if (False):
     idscore = columnmap["IDScore"]
     xluniqueid = columnmap["XLUniqueID"]
 
-    db = IMP.pmi.tools.get_db_from_csv('../data/XL_cliques_2copies.csv')
+    db = IMP.pmi1.tools.get_db_from_csv('../data/XL_cliques_2copies.csv')
 
     dist_min = 3.0
     dist_max = 35.0
@@ -635,7 +635,7 @@ if (False):
         id_score = float(entry[idscore])
         xlunique_id = int(entry[xluniqueid])
 
-        dr = IMP.pmi.restraints.basic.DistanceRestraint(simo,(res1,res1,mol1), (res2,res2,mol2), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
+        dr = IMP.pmi1.restraints.basic.DistanceRestraint(simo,(res1,res1,mol1), (res2,res2,mol2), distancemin=dist_min, distancemax=dist_max, resolution=1.0)
         dr.add_to_model()
         temp_label = mol1 + "_" + str(res1) + "-" + mol2 + "_" + str(res2)
         dr.set_label(temp_label)
@@ -656,7 +656,7 @@ if (False):
     """
     # tail module em density
     mass = sum((IMP.atom.Mass(p).get_mass() for h in resdensities for p in IMP.atom.get_leaves(h)))
-    gem = IMP.pmi.restraints.em.GaussianEMRestraint(resdensities,
+    gem = IMP.pmi1.restraints.em.GaussianEMRestraint(resdensities,
                                                     '../data/em_density/spidervol_overlap.mrc.gmm.100.txt',
                                                     #'../data/em_density/emanvol.mrc.gmm.100.txt',
                                                     target_mass_scale=mass,
@@ -671,7 +671,7 @@ if (False):
     
     # tail module em density
     mass2 = sum((IMP.atom.Mass(p).get_mass() for h in resdensities for p in IMP.atom.get_leaves(h)))
-    gem2 = IMP.pmi.restraints.em.GaussianEMRestraint(resdensities,
+    gem2 = IMP.pmi1.restraints.em.GaussianEMRestraint(resdensities,
                                                     #'../data/em_density/spidervol_overlap.mrc.gmm.100.txt',
                                                     '../data/em_density/emanvol.mrc.gmm.100.txt',
                                                     target_mass_scale=mass2,
@@ -688,7 +688,7 @@ if (False):
 #####################################################
 # Metropolis Monte Carlo sampling with Replica Exchange
 #####################################################
-sf = IMP.core.RestraintsScoringFunction(IMP.pmi.tools.get_restraint_set(m))
+sf = IMP.core.RestraintsScoringFunction(IMP.pmi1.tools.get_restraint_set(m))
 print "\nEVAL 1 : ", sf.evaluate(False), " (initial) - ", rank
 
 if (True):
@@ -696,7 +696,7 @@ if (True):
     print "\nEVAL 2 : ", sf.evaluate(False), " (after calling optimize_floppy_bodies(150)) - ", rank
 
     initial_nframes = 200
-    mc1 = IMP.pmi.macros.ReplicaExchange0(m,
+    mc1 = IMP.pmi1.macros.ReplicaExchange0(m,
                                         simo,
                                         monte_carlo_sample_objects = sampleobjects,
                                         output_objects = outputobjects,
@@ -734,7 +734,7 @@ if (True):
     #----------------------------------------------------
     # Nup82 - Nup84 DSS XL data
     #----------------------------------------------------
-    xl5 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+    xl5 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                                         '../data_nup84/XL_n82n84_DSS.csv',
                                                         length = 21.0,
                                                         slope = 0.00,
@@ -784,14 +784,14 @@ if (inputs.em2d_input is not None):
     em2d.set_weight(em2d_weight)
     outputobjects.append(em2d)
 
-    sf = IMP.core.RestraintsScoringFunction(IMP.pmi.tools.get_restraint_set(m))
+    sf = IMP.core.RestraintsScoringFunction(IMP.pmi1.tools.get_restraint_set(m))
     print "\nEVAL 4 : ", sf.evaluate(False), " (after applying the EM 2D restraint) - ", rank
 
 
 #####################################################
 # Metropolis Monte Carlo sampling with Replica Exchange
 #####################################################
-mc2 = IMP.pmi.macros.ReplicaExchange0(m,
+mc2 = IMP.pmi1.macros.ReplicaExchange0(m,
                                     simo,
                                     monte_carlo_sample_objects = sampleobjects,
                                     output_objects = outputobjects,

@@ -1,6 +1,6 @@
 import IMP
-import IMP.pmi
-#import IMP.pmi.macros
+import IMP.pmi1
+#import IMP.pmi1.macros
 import sys
 
 #####################################################

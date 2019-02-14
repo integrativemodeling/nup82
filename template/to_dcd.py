@@ -20,7 +20,7 @@ import RMF
 import math
 import IMP.atom
 import IMP.rmf
-import IMP.pmi.output
+import IMP.pmi1.output
 
 class DCDOutput(object):
     """Dump a series of scaffold coordinates from RMFs to a DCD file."""
@@ -102,7 +102,7 @@ class RMFReader(object):
 
     def _get_coords(self, m, mhs, comps):
         name = 'dcd-output'
-        o = IMP.pmi.output.Output(atomistic=True)
+        o = IMP.pmi1.output.Output(atomistic=True)
         o.dictionary_pdbs[name] = mhs[0]
         o._init_dictchain(name, mhs[0], multichar_chain=True)
 

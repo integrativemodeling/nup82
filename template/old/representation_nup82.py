@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""@namespace IMP.pmi.representation
+"""@namespace IMP.pmi1.representation
    Representation of the system.
 """
 
@@ -10,13 +10,13 @@ import IMP.core
 import IMP.algebra
 import IMP.atom
 import IMP.display
-import IMP.pmi
+import IMP.pmi1
 import IMP.isd
 from math import pi, sqrt
 
 from operator import itemgetter
-import IMP.pmi.tools
-import IMP.pmi.output
+import IMP.pmi1.tools
+import IMP.pmi1.output
 import IMP.rmf
 import RMF
 import os
@@ -123,7 +123,7 @@ class Representation(object):
         self.color_dict = {}
         self.sequence_dict = {}
         self.hier_geometry_pairs = {}
-        self.hier_db = IMP.pmi.tools.HierarchyDatabase()
+        self.hier_db = IMP.pmi1.tools.HierarchyDatabase()
         # this dictionary stores the hierarchies by component name and representation type
         # self.hier_representation[name][representation_type]
         # where representation type is Res:X, Beads, Densities, Representation,
@@ -238,16 +238,16 @@ class Representation(object):
             start = resrange[0] - offset
             end = resrange[1] - offset
 
-        gaps = IMP.pmi.tools.get_residue_gaps_in_hierarchy(
+        gaps = IMP.pmi1.tools.get_residue_gaps_in_hierarchy(
             t,
             resrange[0],
             resrange[1])
 
-        xyznter = IMP.pmi.tools.get_closest_residue_position(
+        xyznter = IMP.pmi1.tools.get_closest_residue_position(
             t,
             resrange[0],
             terminus="N")
-        xyzcter = IMP.pmi.tools.get_closest_residue_position(
+        xyzcter = IMP.pmi1.tools.get_closest_residue_position(
             t,
             resrange[1],
             terminus="C")
@@ -540,7 +540,7 @@ class Representation(object):
             IMP.display.Colored.setup_particle(prt, clr)
 
             # decorate particles according to their resolution
-            IMP.pmi.Resolution.setup_particle(prt, resolution)
+            IMP.pmi1.Resolution.setup_particle(prt, resolution)
 
             IMP.core.XYZR.setup_particle(prt)
             ptem = IMP.core.XYZR(prt)
@@ -564,8 +564,8 @@ class Representation(object):
                     ptem.set_coordinates(incoord)
             except TypeError:
                 pass
-            IMP.pmi.Uncertainty.setup_particle(prt, radius)
-            IMP.pmi.Symmetric.setup_particle(prt, 0)
+            IMP.pmi1.Uncertainty.setup_particle(prt, radius)
+            IMP.pmi1.Symmetric.setup_particle(prt, 0)
             self.floppy_bodies.append(prt)
             IMP.core.XYZ(prt).set_coordinates_are_optimized(True)
             outhiers += [h]
@@ -583,7 +583,7 @@ class Representation(object):
             colors=None
         else:
             colors=[color]
-        for chunk in IMP.pmi.tools.list_chunks_iterator(range(begin, end + 1), length):
+        for chunk in IMP.pmi1.tools.list_chunks_iterator(range(begin, end + 1), length):
             outhiers += self.add_component_beads(name,
                                                  [(chunk[0], chunk[-1])], colors=colors,incoord=incoord)
         return outhiers
@@ -648,12 +648,12 @@ class Representation(object):
         if not particles is None:
             fragment_particles += particles
         if not hierarchies is None:
-            fragment_particles += IMP.pmi.tools.select(
+            fragment_particles += IMP.pmi1.tools.select(
                 self, resolution=resolution,
                 hierarchies=hierarchies)
         if not selection_tuples is None:
             for st in selection_tuples:
-                fragment_particles += IMP.pmi.tools.select_by_tuple(
+                fragment_particles += IMP.pmi1.tools.select_by_tuple(
                     self, tupleselection=st,
                     resolution=resolution,
                     name_is_ambiguous=False)
@@ -749,13 +749,13 @@ class Representation(object):
             fragment_particles = particles
 
         if not hierarchies is None:
-            fragment_particles += IMP.pmi.tools.select(
+            fragment_particles += IMP.pmi1.tools.select(
                 self, resolution=resolution,
                 hierarchies=hierarchies)
 
         if not selection_tuples is None:
             for st in selection_tuples:
-                fragment_particles += IMP.pmi.tools.select_by_tuple(
+                fragment_particles += IMP.pmi1.tools.select_by_tuple(
                     self, tupleselection=st,
                     resolution=resolution,
                     name_is_ambiguous=False)
@@ -800,23 +800,23 @@ class Representation(object):
         # copying attributes
         for n, pmain in enumerate(psmain):
             pclone = psclone[n]
-            if IMP.pmi.Resolution.get_is_setup(pmain):
-                resolution = IMP.pmi.Resolution(pmain).get_resolution()
-                IMP.pmi.Resolution.setup_particle(pclone, resolution)
-                for kk in IMP.pmi.tools.get_residue_indexes(pclone):
+            if IMP.pmi1.Resolution.get_is_setup(pmain):
+                resolution = IMP.pmi1.Resolution(pmain).get_resolution()
+                IMP.pmi1.Resolution.setup_particle(pclone, resolution)
+                for kk in IMP.pmi1.tools.get_residue_indexes(pclone):
                     self.hier_db.add_particles(
                         name,
                         kk,
-                        IMP.pmi.Resolution(pclone).get_resolution(),
+                        IMP.pmi1.Resolution(pclone).get_resolution(),
                         [pclone])
 
-            if IMP.pmi.Uncertainty.get_is_setup(pmain):
-                uncertainty = IMP.pmi.Uncertainty(pmain).get_uncertainty()
-                IMP.pmi.Uncertainty.setup_particle(pclone, uncertainty)
+            if IMP.pmi1.Uncertainty.get_is_setup(pmain):
+                uncertainty = IMP.pmi1.Uncertainty(pmain).get_uncertainty()
+                IMP.pmi1.Uncertainty.setup_particle(pclone, uncertainty)
 
-            if IMP.pmi.Symmetric.get_is_setup(pmain):
-                symmetric = IMP.pmi.Symmetric(pmain).get_symmetric()
-                IMP.pmi.Symmetric.setup_particle(pclone, symmetric)
+            if IMP.pmi1.Symmetric.get_is_setup(pmain):
+                symmetric = IMP.pmi1.Symmetric(pmain).get_symmetric()
+                IMP.pmi1.Symmetric.setup_particle(pclone, symmetric)
 
         return outhier
 
@@ -835,9 +835,9 @@ class Representation(object):
 
         '''
 
-        import IMP.pmi.analysis
+        import IMP.pmi1.analysis
 
-        prots = IMP.pmi.analysis.get_hiers_from_rmf(
+        prots = IMP.pmi1.analysis.get_hiers_from_rmf(
             self.m,
             rmf_frame_number,
             rmf_file_name)
@@ -855,7 +855,7 @@ class Representation(object):
 
         psrmf = []
         for p in allpsrmf:
-            (protname, is_a_bead) = IMP.pmi.tools.get_prot_name_from_particle(
+            (protname, is_a_bead) = IMP.pmi1.tools.get_prot_name_from_particle(
                 p, self.hier_dict.keys())
             ###################################
             # by SJ Kim (05/18/2015)
@@ -888,7 +888,7 @@ class Representation(object):
         
         psrepr = []
         for p in allpsrepr:
-            (protname, is_a_bead) = IMP.pmi.tools.get_prot_name_from_particle(
+            (protname, is_a_bead) = IMP.pmi1.tools.get_prot_name_from_particle(
                 p, self.hier_dict.keys())
 
             self_names=(p.get_name()).replace("-","_").split("_")
@@ -996,7 +996,7 @@ class Representation(object):
 
                     chil = resclone0.get_children()
                     for ch in chil:
-                        IMP.pmi.Resolution.setup_particle(ch, 0)
+                        IMP.pmi1.Resolution.setup_particle(ch, 0)
                         try:
                             clr = IMP.display.get_rgb_color(color)
                         except:
@@ -1026,9 +1026,9 @@ class Representation(object):
                     radius = IMP.algebra.get_ball_radius_from_volume_3d(vol)
                     IMP.core.XYZR.setup_particle(prt).set_radius(radius)
                     IMP.atom.Mass.setup_particle(prt, 100)
-                    IMP.pmi.Uncertainty.setup_particle(prt, radius)
-                    IMP.pmi.Symmetric.setup_particle(prt, 0)
-                    IMP.pmi.Resolution.setup_particle(prt, 1)
+                    IMP.pmi1.Uncertainty.setup_particle(prt, radius)
+                    IMP.pmi1.Symmetric.setup_particle(prt, 0)
+                    IMP.pmi1.Resolution.setup_particle(prt, 1)
                     try:
                         clr = IMP.display.get_rgb_color(color)
                     except:
@@ -1065,9 +1065,9 @@ class Representation(object):
                         self.hier_db.add_particles(name, kk, r, [prt])
 
                     radius = IMP.core.XYZR(prt).get_radius()
-                    IMP.pmi.Uncertainty.setup_particle(prt, radius)
-                    IMP.pmi.Symmetric.setup_particle(prt, 0)
-                    IMP.pmi.Resolution.setup_particle(prt, r)
+                    IMP.pmi1.Uncertainty.setup_particle(prt, radius)
+                    IMP.pmi1.Symmetric.setup_particle(prt, 0)
+                    IMP.pmi1.Resolution.setup_particle(prt, r)
 
                     # setting up color for each particle in the
                     # hierarchy, if colors missing in the colors list set it to
@@ -1260,7 +1260,7 @@ class Representation(object):
 
     def set_current_coordinates_as_reference_for_rmsd(self, label="None"):
         # getting only coordinates from pdb
-        ps = IMP.pmi.tools.select(self, resolution=1.0)
+        ps = IMP.pmi1.tools.select(self, resolution=1.0)
         # storing the reference coordinates and the particles
         self.reference_structures[label] = (
             [IMP.core.XYZ(p).get_coordinates() for p in ps],
@@ -1300,8 +1300,8 @@ class Representation(object):
         # to construct backbone traces
         self.hier_geometry_pairs[name] = []
         protein_h = self.hier_dict[name]
-        pbr = IMP.pmi.tools.select(self, name=name, resolution=resolution)
-        pbr = IMP.pmi.tools.sort_by_residues(pbr)
+        pbr = IMP.pmi1.tools.select(self, name=name, resolution=resolution)
+        pbr = IMP.pmi1.tools.sort_by_residues(pbr)
 
         for n in range(len(pbr) - 1):
             self.hier_geometry_pairs[name].append((pbr[n], pbr[n + 1], color))
@@ -1334,8 +1334,8 @@ class Representation(object):
             except:
                 end = fr
 
-            startres = IMP.pmi.tools.get_residue_indexes(start)[0]
-            endres = IMP.pmi.tools.get_residue_indexes(end)[-1]
+            startres = IMP.pmi1.tools.get_residue_indexes(start)[0]
+            endres = IMP.pmi1.tools.get_residue_indexes(end)[-1]
             SortedSegments.append((start, end, startres))
         SortedSegments = sorted(SortedSegments, key=itemgetter(2))
 
@@ -1344,10 +1344,10 @@ class Representation(object):
             last = SortedSegments[x][1]
             first = SortedSegments[x + 1][0]
 
-            nreslast = len(IMP.pmi.tools.get_residue_indexes(last))
-            lastresn = IMP.pmi.tools.get_residue_indexes(last)[-1]
-            nresfirst = len(IMP.pmi.tools.get_residue_indexes(first))
-            firstresn = IMP.pmi.tools.get_residue_indexes(first)[0]
+            nreslast = len(IMP.pmi1.tools.get_residue_indexes(last))
+            lastresn = IMP.pmi1.tools.get_residue_indexes(last)[-1]
+            nresfirst = len(IMP.pmi1.tools.get_residue_indexes(first))
+            firstresn = IMP.pmi1.tools.get_residue_indexes(first)[0]
 
             residuegap = firstresn - lastresn - 1
             if self.disorderedlength and (nreslast / 2 + nresfirst / 2 + residuegap) > 20.0:
@@ -1382,17 +1382,17 @@ class Representation(object):
 
         self.linker_restraints.add_restraint(sortedsegments_cr)
         self.linker_restraints.add_restraint(unmodeledregions_cr)
-        IMP.pmi.tools.add_restraint_to_model(self.m, self.linker_restraints)
+        IMP.pmi1.tools.add_restraint_to_model(self.m, self.linker_restraints)
         self.sortedsegments_cr_dict[name] = sortedsegments_cr
         self.unmodeledregions_cr_dict[name] = unmodeledregions_cr
 
     def optimize_floppy_bodies(self, nsteps, temperature=1.0):
-        import IMP.pmi.samplers
-        pts = IMP.pmi.tools.ParticleToSampleList()
+        import IMP.pmi1.samplers
+        pts = IMP.pmi1.tools.ParticleToSampleList()
         for n, fb in enumerate(self.floppy_bodies):
             pts.add_particle(fb, "Floppy_Bodies", 1.0, "Floppy_Body_" + str(n))
         if len(pts.get_particles_to_sample()) > 0:
-            mc = IMP.pmi.samplers.MonteCarlo(self.m, [pts], temperature)
+            mc = IMP.pmi1.samplers.MonteCarlo(self.m, [pts], temperature)
             print("optimize_floppy_bodies: optimizing %i floppy bodies" % len(self.floppy_bodies))
             mc.optimize(nsteps)
         else:
@@ -1422,10 +1422,10 @@ class Representation(object):
                 pc = copyparticles[n]
 
                 mainpurged.append(p)
-                IMP.pmi.Symmetric.setup_particle(p, 0)
+                IMP.pmi1.Symmetric.setup_particle(p, 0)
 
                 copypurged.append(pc)
-                IMP.pmi.Symmetric.setup_particle(pc, 1)
+                IMP.pmi1.Symmetric.setup_particle(pc, 1)
 
             lc = IMP.container.ListSingletonContainer(self.m)
             for n, p in enumerate(mainpurged):
@@ -1472,10 +1472,10 @@ class Representation(object):
                 lc = IMP.container.ListSingletonContainer(self.m)
                 for n, p in enumerate(mainparts):
                     pc = copyparts[n]
-                    if not IMP.pmi.Symmetric.get_is_setup(p):
-                        IMP.pmi.Symmetric.setup_particle(p, 0)
-                    if not IMP.pmi.Symmetric.get_is_setup(pc):
-                        IMP.pmi.Symmetric.setup_particle(pc, 1)
+                    if not IMP.pmi1.Symmetric.get_is_setup(p):
+                        IMP.pmi1.Symmetric.setup_particle(p, 0)
+                    if not IMP.pmi1.Symmetric.get_is_setup(pc):
+                        IMP.pmi1.Symmetric.setup_particle(pc, 1)
                     IMP.core.Reference.setup_particle(pc, p)
                     lc.add_particle(pc)
                 c = IMP.container.SingletonsConstraint(sm, None, lc)
@@ -1652,10 +1652,10 @@ class Representation(object):
         with given length range, specified by min_length and max_length.
         '''
         try:
-            hiers = IMP.pmi.tools.flatten_list(hiers)
+            hiers = IMP.pmi1.tools.flatten_list(hiers)
         except:
             pass
-        for hs in IMP.pmi.tools.sublist_iterator(hiers, min_length, max_length):
+        for hs in IMP.pmi1.tools.sublist_iterator(hiers, min_length, max_length):
             self.set_super_rigid_body_from_hierarchies(hs, axis, min_length)
 
     def set_super_rigid_bodies(self, subunits, coords=None):
@@ -1740,7 +1740,7 @@ class Representation(object):
         particles = []
         print(selection_tuples)
         for s in selection_tuples:
-            ps = IMP.pmi.tools.select_by_tuple(
+            ps = IMP.pmi1.tools.select_by_tuple(
                 representation=self, tupleselection=tuple(s),
                 resolution=None, name_is_ambiguous=False)
             particles += ps
@@ -1775,7 +1775,7 @@ class Representation(object):
     def draw_hierarchy_graph(self):
         for c in IMP.atom.Hierarchy(self.prot).get_children():
             print("Drawing hierarchy graph for " + c.get_name())
-            IMP.pmi.output.get_graph_from_hierarchy(c)
+            IMP.pmi1.output.get_graph_from_hierarchy(c)
 
     def get_geometries(self):
         # create segments at the lowest resolution
@@ -1829,7 +1829,7 @@ class Representation(object):
                 for r in resolutions:
                     ps += self.hier_db.get_particles(name, nres, r)
                 print("%20s %7s" % (name, nres), " ".join(["%20s %7s" % (str(p.get_name()),
-                                                                         str(IMP.pmi.Resolution(p).get_resolution())) for p in ps]))
+                                                                         str(IMP.pmi1.Resolution(p).get_resolution())) for p in ps]))
             except:
                 print("%20s %20s" % (name, nres), "**** not represented ****")
 
@@ -2029,16 +2029,16 @@ class Representation(object):
         srbtmp = []
         if not self.rigidbodiesarefixed:
             for rb in self.rigid_bodies:
-                if IMP.pmi.Symmetric.get_is_setup(rb):
-                    if IMP.pmi.Symmetric(rb).get_symmetric() != 1:
+                if IMP.pmi1.Symmetric.get_is_setup(rb):
+                    if IMP.pmi1.Symmetric(rb).get_symmetric() != 1:
                         rbtmp.append(rb)
                 else:
                     if rb not in self.fixed_rigid_bodies:
                         rbtmp.append(rb)
 
         for fb in self.floppy_bodies:
-            if IMP.pmi.Symmetric.get_is_setup(fb):
-                if IMP.pmi.Symmetric(fb).get_symmetric() != 1:
+            if IMP.pmi1.Symmetric.get_is_setup(fb):
+                if IMP.pmi1.Symmetric(fb).get_symmetric() != 1:
                     fbtmp.append(fb)
             else:
                 fbtmp.append(fb)
@@ -2075,7 +2075,7 @@ class Representation(object):
 
     def _evaluate(self, deriv):
         """Evaluate the total score of all added restraints"""
-        r = IMP.pmi.tools.get_restraint_set(self.m)
+        r = IMP.pmi1.tools.get_restraint_set(self.m)
         return r.evaluate(deriv)
 
     def get_output(self):
@@ -2142,20 +2142,20 @@ class Representation(object):
         output["Number_of_rigid_bodies"] = len(self.rigid_bodies)
         output["Number_of_super_bodies"] = len(self.super_rigid_bodies)
         output["Selection_resolution_1"] = len(
-            IMP.pmi.tools.select(self, resolution=1))
+            IMP.pmi1.tools.select(self, resolution=1))
         output["Selection_resolution_5"] = len(
-            IMP.pmi.tools.select(self, resolution=5))
+            IMP.pmi1.tools.select(self, resolution=5))
         output["Selection_resolution_7"] = len(
-            IMP.pmi.tools.select(self, resolution=5))
+            IMP.pmi1.tools.select(self, resolution=5))
         output["Selection_resolution_10"] = len(
-            IMP.pmi.tools.select(self, resolution=10))
+            IMP.pmi1.tools.select(self, resolution=10))
         output["Selection_resolution_100"] = len(
-            IMP.pmi.tools.select(self, resolution=100))
-        output["Selection_All"] = len(IMP.pmi.tools.select(self))
+            IMP.pmi1.tools.select(self, resolution=100))
+        output["Selection_All"] = len(IMP.pmi1.tools.select(self))
         output["Selection_resolution=1"] = len(
-            IMP.pmi.tools.select(self, resolution=1))
+            IMP.pmi1.tools.select(self, resolution=1))
         output["Selection_resolution=1,resid=10"] = len(
-            IMP.pmi.tools.select(self, resolution=1, residue=10))
+            IMP.pmi1.tools.select(self, resolution=1, residue=10))
         for resolution in self.hier_resolution:
             output["Hier_resolution_dictionary" +
                    str(resolution)] = len(self.hier_resolution[resolution])
@@ -2163,7 +2163,7 @@ class Representation(object):
             output[
                 "Selection_resolution=1,resid=10,name=" +
                 name] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=1,
                     name=name,
@@ -2172,7 +2172,7 @@ class Representation(object):
                 "Selection_resolution=1,resid=10,name=" +
                 name +
                 ",ambiguous"] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=1,
                     name=name,
@@ -2182,7 +2182,7 @@ class Representation(object):
                 "Selection_resolution=1,resid=10,name=" +
                 name +
                 ",ambiguous"] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=1,
                     name=name,
@@ -2191,7 +2191,7 @@ class Representation(object):
             output[
                 "Selection_resolution=1,resrange=(10,20),name=" +
                 name] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=1,
                     name=name,
@@ -2201,7 +2201,7 @@ class Representation(object):
                 "Selection_resolution=1,resrange=(10,20),name=" +
                 name +
                 ",ambiguous"] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=1,
                     name=name,
@@ -2211,7 +2211,7 @@ class Representation(object):
             output[
                 "Selection_resolution=10,resrange=(10,20),name=" +
                 name] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=10,
                     name=name,
@@ -2221,7 +2221,7 @@ class Representation(object):
                 "Selection_resolution=10,resrange=(10,20),name=" +
                 name +
                 ",ambiguous"] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=10,
                     name=name,
@@ -2231,7 +2231,7 @@ class Representation(object):
             output[
                 "Selection_resolution=100,resrange=(10,20),name=" +
                 name] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=100,
                     name=name,
@@ -2241,7 +2241,7 @@ class Representation(object):
                 "Selection_resolution=100,resrange=(10,20),name=" +
                 name +
                 ",ambiguous"] = len(
-                IMP.pmi.tools.select(
+                IMP.pmi1.tools.select(
                     self,
                     resolution=100,
                     name=name,

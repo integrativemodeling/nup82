@@ -1,17 +1,16 @@
-"""@namespace IMP.pmi.macros
+"""@namespace IMP.pmi1.macros
 Protocols for sampling structures and analyzing them.
 """
 
 from __future__ import print_function
-import IMP.pmi.representation
-import IMP.pmi.tools
-import IMP.pmi.samplers
-import IMP.pmi.output
-import IMP.pmi.analysis
-import IMP.pmi.io
+import IMP.pmi1.representation
+import IMP.pmi1.tools
+import IMP.pmi1.samplers
+import IMP.pmi1.output
+import IMP.pmi1.analysis
+import IMP.pmi1.io
 import IMP.rmf
 import IMP.isd
-import IMP.pmi.dof
 import RMF
 import os
 import glob
@@ -199,11 +198,11 @@ class ReplicaExchange0(object):
         if self.monte_carlo_sample_objects is not None or self.degrees_of_freedom is not None:
             print("Setting up MonteCarlo")
             if self.degrees_of_freedom is not None:
-                sampler_mc = IMP.pmi.samplers.MonteCarlo(self.model,
+                sampler_mc = IMP.pmi1.samplers.MonteCarlo(self.model,
                                                          temp=self.vars["monte_carlo_temperature"],
                                                          dof=self.degrees_of_freedom)
             else:
-                sampler_mc = IMP.pmi.samplers.MonteCarlo(self.model,
+                sampler_mc = IMP.pmi1.samplers.MonteCarlo(self.model,
                                                  self.monte_carlo_sample_objects,
                                                  self.vars["monte_carlo_temperature"])
             if self.vars["simulated_annealing"]:
@@ -218,7 +217,7 @@ class ReplicaExchange0(object):
 
         if self.molecular_dynamics_sample_objects is not None:
             print("Setting up MolecularDynamics")
-            sampler_md = IMP.pmi.samplers.MolecularDynamics(self.model,
+            sampler_md = IMP.pmi1.samplers.MolecularDynamics(self.model,
                                                             self.molecular_dynamics_sample_objects,
                                                             self.vars["monte_carlo_temperature"],
                                                             maximum_time_step=self.molecular_dynamics_max_time_step)
@@ -233,7 +232,7 @@ class ReplicaExchange0(object):
 # -------------------------------------------------------------------------
 
         print("Setting up ReplicaExchange")
-        rex = IMP.pmi.samplers.ReplicaExchange(self.model,
+        rex = IMP.pmi1.samplers.ReplicaExchange(self.model,
                                                self.vars[
                                                    "replica_exchange_minimum_temperature"],
                                                self.vars[
@@ -284,11 +283,11 @@ class ReplicaExchange0(object):
 
 # -------------------------------------------------------------------------
 
-        sw = IMP.pmi.tools.Stopwatch()
+        sw = IMP.pmi1.tools.Stopwatch()
         self.output_objects.append(sw)
 
         print("Setting up stat file")
-        output = IMP.pmi.output.Output(atomistic=self.vars["atomistic"])
+        output = IMP.pmi1.output.Output(atomistic=self.vars["atomistic"])
         low_temp_stat_file = globaldir + \
             self.vars["stat_file_name_suffix"] + "." + str(myindex) + ".out"
         output.init_stat2(low_temp_stat_file,
@@ -373,7 +372,7 @@ class ReplicaExchange0(object):
                     sampler_md.optimize(self.vars["molecular_dynamics_steps"])
                 if sampler_mc is not None:
                     sampler_mc.optimize(self.vars["monte_carlo_steps"])
-            score = IMP.pmi.tools.get_restraint_set(self.model).evaluate(False)
+            score = IMP.pmi1.tools.get_restraint_set(self.model).evaluate(False)
             output.set_output_entry("score", score)
 
             my_temp_index = int(rex.get_my_temp() * temp_index_factor)
@@ -432,7 +431,7 @@ data = [("Rpb1",     pdbfile,   "A",     0.00000000,  (fastafile,    0)),
 
     '''
 
-    r = IMP.pmi.representation.Representation(m)
+    r = IMP.pmi1.representation.Representation(m)
 
     # the dictionary for the hierarchies,
     hierarchies = {}
@@ -445,7 +444,7 @@ data = [("Rpb1",     pdbfile,   "A",     0.00000000,  (fastafile,    0)),
         color_id = d[3]
         fasta_file = d[4][0]
         # this function
-        fastids = IMP.pmi.tools.get_ids_from_fasta_file(fasta_file)
+        fastids = IMP.pmi1.tools.get_ids_from_fasta_file(fasta_file)
         fasta_file_id = d[4][1]
         # avoid to add a component with the same name
         r.create_component(component_name,
@@ -500,7 +499,7 @@ class BuildModel(object):
         """Constructor.
            @param model The IMP model
            @param component_topologies List of
-                  IMP.pmi.topology.ComponentTopology items
+                  IMP.pmi1.topology.ComponentTopology items
            @param list_of_rigid_bodies List of lists of domain names that will
                   be moved as rigid bodies.
            @param list_of_super_rigid_bodies List of lists of domain names
@@ -520,7 +519,7 @@ class BuildModel(object):
                   do anything.
         """
         self.m = model
-        self.simo = IMP.pmi.representation.Representation(self.m,
+        self.simo = IMP.pmi1.representation.Representation(self.m,
                                                           upperharmonic=True,
                                                           disorderedlength=False)
 
@@ -659,7 +658,7 @@ class BuildModel(object):
                 else:
                     continue
                 radius=IMP.core.XYZR(b).get_radius()
-                num_residues=len(IMP.pmi.tools.get_residue_indexes(b))
+                num_residues=len(IMP.pmi1.tools.get_residue_indexes(b))
                 scale_factor=slope*float(num_residues)+1.0
                 print(scale_factor)
                 new_radius=scale_factor*radius
@@ -675,7 +674,7 @@ class BuildModel(object):
         res_ind=[]
         for pb in pdbbits+helixbits:
             for p in IMP.core.get_leaves(pb):
-                res_ind+=IMP.pmi.tools.get_residue_indexes(p)
+                res_ind+=IMP.pmi1.tools.get_residue_indexes(p)
 
         number_of_residues=len(set(res_ind))
         outhier=[]
@@ -928,7 +927,7 @@ class BuildModel1(object):
                 else:
                     continue
                 radius=IMP.core.XYZR(b).get_radius()
-                num_residues=len(IMP.pmi.tools.get_residue_indexes(b))
+                num_residues=len(IMP.pmi1.tools.get_residue_indexes(b))
                 scale_factor=slope*float(num_residues)+1.0
                 print(scale_factor)
                 new_radius=scale_factor*radius
@@ -945,7 +944,7 @@ class BuildModel1(object):
         res_ind=[]
         for pb in pdbbits+helixbits:
             for p in IMP.core.get_leaves(pb):
-                res_ind+=IMP.pmi.tools.get_residue_indexes(p)
+                res_ind+=IMP.pmi1.tools.get_residue_indexes(p)
 
         number_of_residues=len(set(res_ind))
         outhier=[]
@@ -1052,7 +1051,7 @@ class BuildModel1(object):
 
     def save_rmf(self,rmfname):
 
-        o=IMP.pmi.output.Output()
+        o=IMP.pmi1.output.Output()
         o.init_rmf(rmfname,[self.simo.prot])
         o.write_rmf(rmfname)
         o.close_rmf(rmfname)
@@ -1123,7 +1122,7 @@ class AnalysisReplicaExchange0(object):
         from operator import itemgetter
         import math
 
-        trajectory_models = IMP.pmi.io.get_trajectory_models(self.stat_files,
+        trajectory_models = IMP.pmi1.io.get_trajectory_models(self.stat_files,
                                                  score_key,
                                                  rmf_file_key,
                                                  rmf_file_frame_key,
@@ -1221,9 +1220,9 @@ class AnalysisReplicaExchange0(object):
         if not load_distance_matrix_file:
             if (False):
                 if len(self.stat_files)==0: print("ERROR: no stat file found in the given path"); return
-                my_stat_files=IMP.pmi.tools.chunk_list_into_segments(
+                my_stat_files=IMP.pmi1.tools.chunk_list_into_segments(
                     self.stat_files,self.number_of_processes)[self.rank]
-                best_models = IMP.pmi.io.get_best_models(my_stat_files,
+                best_models = IMP.pmi1.io.get_best_models(my_stat_files,
                                                          score_key,
                                                          feature_keys,
                                                          rmf_file_key,
@@ -1250,12 +1249,12 @@ class AnalysisReplicaExchange0(object):
 # ------------------------------------------------------------------------
 
             if self.number_of_processes > 1:
-                score_list = IMP.pmi.tools.scatter_and_gather(score_list)
-                rmf_file_list = IMP.pmi.tools.scatter_and_gather(rmf_file_list)
-                rmf_file_frame_list = IMP.pmi.tools.scatter_and_gather(
+                score_list = IMP.pmi1.tools.scatter_and_gather(score_list)
+                rmf_file_list = IMP.pmi1.tools.scatter_and_gather(rmf_file_list)
+                rmf_file_frame_list = IMP.pmi1.tools.scatter_and_gather(
                     rmf_file_frame_list)
                 for k in feature_keyword_list_dict:
-                    feature_keyword_list_dict[k] = IMP.pmi.tools.scatter_and_gather(
+                    feature_keyword_list_dict[k] = IMP.pmi1.tools.scatter_and_gather(
                         feature_keyword_list_dict[k])
 
             # sort by score and get the best scoring ones
@@ -1286,7 +1285,7 @@ class AnalysisReplicaExchange0(object):
                     best_score_feature_keyword_list_dict[f].append(
                         feature_keyword_list_dict[f][index])
 
-            my_best_score_rmf_tuples = IMP.pmi.tools.chunk_list_into_segments(
+            my_best_score_rmf_tuples = IMP.pmi1.tools.chunk_list_into_segments(
                 best_score_rmf_tuples,
                 self.number_of_processes)[self.rank]
 
@@ -1300,11 +1299,11 @@ class AnalysisReplicaExchange0(object):
 #-------------------------------------------------------------
 # read the coordinates
 # ------------------------------------------------------------
-            rmsd_weights = IMP.pmi.io.get_bead_sizes(self.model,
+            rmsd_weights = IMP.pmi1.io.get_bead_sizes(self.model,
                                                      my_best_score_rmf_tuples[0],
                                                      rmsd_calculation_components,
                                                      state_number=state_number)
-            got_coords = IMP.pmi.io.read_coordinates_of_rmfs(self.model,
+            got_coords = IMP.pmi1.io.read_coordinates_of_rmfs(self.model,
                                                              my_best_score_rmf_tuples,
                                                              alignment_components,
                                                              rmsd_calculation_components,
@@ -1325,7 +1324,7 @@ class AnalysisReplicaExchange0(object):
 # ------------------------------------------------------------------------
             if skip_clustering:
                 if density_custom_ranges:
-                    DensModule = IMP.pmi.analysis.GetModelDensity(
+                    DensModule = IMP.pmi1.analysis.GetModelDensity(
                         density_custom_ranges,
                         resolution=20.0,
                         voxel=voxel_size)
@@ -1350,12 +1349,12 @@ class AnalysisReplicaExchange0(object):
 
                     if (False):
                         if cnt==0:
-                            prots,rs = IMP.pmi.analysis.get_hiers_and_restraints_from_rmf(
+                            prots,rs = IMP.pmi1.analysis.get_hiers_and_restraints_from_rmf(
                               self.model,
                               rmf_frame_number,
                               rmf_name)
                         else:
-                            IMP.pmi.analysis.link_hiers_and_restraints_to_rmf(
+                            IMP.pmi1.analysis.link_hiers_and_restraints_to_rmf(
                                 self.model,
                                 prots,
                                 rs,
@@ -1371,7 +1370,7 @@ class AnalysisReplicaExchange0(object):
                             coords_f1=alignment_coordinates[cnt]
                         if cnt > 0:
                             coords_f2=alignment_coordinates[cnt]
-                            Ali = IMP.pmi.analysis.Alignment(coords_f1, coords_f2)
+                            Ali = IMP.pmi1.analysis.Alignment(coords_f1, coords_f2)
                             transformation = Ali.align()[1]
                             rbs = set()
                             for p in IMP.atom.get_leaves(prot):
@@ -1392,7 +1391,7 @@ class AnalysisReplicaExchange0(object):
                     out_pdb_fn=os.path.join(dircluster,str(cnt)+".pdb")
                     out_rmf_fn=os.path.join(dircluster,str(cnt)+".rmf3")
                     if (False):
-                        o=IMP.pmi.output.Output()
+                        o=IMP.pmi1.output.Output()
                         out_pdb_fn=os.path.join(dircluster,str(cnt)+"."+str(self.rank)+".pdb")
                         out_rmf_fn=os.path.join(dircluster,str(cnt)+"."+str(self.rank)+".rmf3")
                         o.init_pdb(out_pdb_fn,prot)
@@ -1424,15 +1423,15 @@ class AnalysisReplicaExchange0(object):
 
             # broadcast the coordinates
             if self.number_of_processes > 1:
-                all_coordinates = IMP.pmi.tools.scatter_and_gather(
+                all_coordinates = IMP.pmi1.tools.scatter_and_gather(
                     all_coordinates)
-                all_rmf_file_names = IMP.pmi.tools.scatter_and_gather(
+                all_rmf_file_names = IMP.pmi1.tools.scatter_and_gather(
                     all_rmf_file_names)
-                rmf_file_name_index_dict = IMP.pmi.tools.scatter_and_gather(
+                rmf_file_name_index_dict = IMP.pmi1.tools.scatter_and_gather(
                     rmf_file_name_index_dict)
-                alignment_coordinates=IMP.pmi.tools.scatter_and_gather(
+                alignment_coordinates=IMP.pmi1.tools.scatter_and_gather(
                     alignment_coordinates)
-                rmsd_coordinates=IMP.pmi.tools.scatter_and_gather(
+                rmsd_coordinates=IMP.pmi1.tools.scatter_and_gather(
                     rmsd_coordinates)
 
             if self.rank == 0:
@@ -1446,7 +1445,7 @@ class AnalysisReplicaExchange0(object):
 # Calculate distance matrix and cluster
 # ------------------------------------------------------------------------
             print("setup clustering class")
-            Clusters = IMP.pmi.analysis.Clustering(rmsd_weights)
+            Clusters = IMP.pmi1.analysis.Clustering(rmsd_weights)
 
             for n, model_coordinate_dict in enumerate(all_coordinates):
                 template_coordinate_dict = {}
@@ -1477,7 +1476,7 @@ class AnalysisReplicaExchange0(object):
         else:
             if self.rank==0:
                 print("setup clustering class")
-                Clusters = IMP.pmi.analysis.Clustering()
+                Clusters = IMP.pmi1.analysis.Clustering()
                 Clusters.load_distance_matrix_file(file_name=distance_matrix_file)
                 print("clustering with %s clusters" % str(number_of_clusters))
                 Clusters.do_cluster(number_of_clusters)
@@ -1506,7 +1505,7 @@ class AnalysisReplicaExchange0(object):
                 # first initialize the Density class if requested
 
                 if density_custom_ranges:
-                    DensModule = IMP.pmi.analysis.GetModelDensity(
+                    DensModule = IMP.pmi1.analysis.GetModelDensity(
                         density_custom_ranges,
                         resolution=20.0,
                         voxel=voxel_size)
@@ -1539,12 +1538,12 @@ class AnalysisReplicaExchange0(object):
                     clusstat.write(str(tmp_dict) + "\n")
 
                     if k==0:
-                        prots,rs = IMP.pmi.analysis.get_hiers_and_restraints_from_rmf(
+                        prots,rs = IMP.pmi1.analysis.get_hiers_and_restraints_from_rmf(
                           self.model,
                           rmf_frame_number,
                           rmf_name)
                     else:
-                        IMP.pmi.analysis.link_hiers_and_restraints_to_rmf(
+                        IMP.pmi1.analysis.link_hiers_and_restraints_to_rmf(
                             self.model,
                             prots,
                             rs,
@@ -1583,7 +1582,7 @@ class AnalysisReplicaExchange0(object):
                         DensModule.add_subunits_density(prot)
 
                     # pdb writing should be optimized!
-                    o = IMP.pmi.output.Output()
+                    o = IMP.pmi1.output.Output()
                     temp_rmf_name = rmf_name.split("/")[4]
                     #temp_rmf_name = rmf_name.split("/")[2]
                     temp_rmf_name = temp_rmf_name.replace(".rmf3", "")
