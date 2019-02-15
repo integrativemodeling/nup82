@@ -5,6 +5,10 @@ import os
 import sys
 import subprocess
 import ihm.reader
+try:
+    from ihm import cross_linkers
+except ImportError:
+    cross_linkers = None
 
 TOPDIR = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 
@@ -75,7 +79,10 @@ class Tests(unittest.TestCase):
         # 27 restraints - 3 crosslinks, 21 EM2D images, 3 SAXS profiles
         self.assertEqual(len(s.restraints), 27)
         xl1, xl2, xl3 = s.restraints[:3]
-        self.assertEqual(xl1.linker_type, 'DSS')
+        if cross_linkers is None:
+            self.assertEqual(xl1.linker_type, 'DSS')
+        else:
+            self.assertEqual(xl1.linker.auth_name, cross_linkers.dss.auth_name)
         self.assertEqual(len(xl1.experimental_cross_links), 240)
         self.assertEqual(len(xl1.cross_links), 942)
         self.assertEqual(xl1.dataset.location.path,
@@ -83,8 +90,12 @@ class Tests(unittest.TestCase):
         # No final psi/sigma values available
         self.assertEqual(sum(len(x.fits) for x in xl1.cross_links), 0)
 
-        self.assertEqual(xl2.linker_type, 'DSS')
-        self.assertEqual(xl3.linker_type, 'EDC')
+        if cross_linkers is None:
+            self.assertEqual(xl2.linker_type, 'DSS')
+            self.assertEqual(xl3.linker_type, 'EDC')
+        else:
+            self.assertEqual(xl2.linker.auth_name, cross_linkers.dss.auth_name)
+            self.assertEqual(xl3.linker.auth_name, cross_linkers.edc.auth_name)
 
         em2d_rsrs = s.restraints[3:-3]
         for em2d in em2d_rsrs:
