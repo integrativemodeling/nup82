@@ -24,6 +24,10 @@ import IMP.pmi1.mmcif
 import ihm
 import ihm.analysis
 import ihm.dataset
+try:
+    from ihm import cross_linkers
+except ImportError:
+    pass
 #import representation_nup82
 import IMP.pmi1.representation
 import IMP.pmi1.macros
@@ -854,5 +858,7 @@ if inputs.mmcif:
     for r in po.system.restraints:
         if hasattr(r, 'linker_type') and r.linker_type == 'skDSS':
             r.linker_type = 'DSS'
+        elif hasattr(r, 'linker') and r.linker.auth_name == 'skDSS':
+            r.linker = cross_linkers.dss
 
     po.flush()
