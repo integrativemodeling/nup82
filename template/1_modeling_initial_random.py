@@ -25,6 +25,10 @@ import ihm
 import ihm.analysis
 import ihm.dataset
 try:
+    import ihm.reference
+except ImportError:
+    pass
+try:
     from ihm import cross_linkers
 except ImportError:
     pass
@@ -759,6 +763,15 @@ mc2.execute_macro()
 print("\nEVAL 5 : ", sf.evaluate(False), " (final evaluation) - ", rank)
 
 if inputs.mmcif:
+    # Link entities to UniProt
+    if hasattr(ihm, 'reference'):
+        for subunit, accession in (
+                ('Dyn2.1', 'Q02647'), ('Nup82.1', 'P40368'),
+                ('Nup159.1', 'P40477'), ('Nsp1.1', 'P14907'),
+                ('Nup116.1', 'Q02630')):
+            ref = ihm.reference.UniProtSequence.from_accession(accession)
+            e = po.asym_units[subunit].entity.references.append(ref)
+
     # Add refinement step with all 2D EM data
     # (see 2_modeling_allEM_except11_19.py)
     # note that we also exclude image #2 because we've already added that above
