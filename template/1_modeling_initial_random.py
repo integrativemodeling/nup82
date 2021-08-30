@@ -29,6 +29,10 @@ try:
     import ihm.reference
 except ImportError:
     pass
+try:
+    import ihm.citations
+except ImportError:
+    pass
 #import representation_nup82
 import IMP.pmi1.representation
 import IMP.pmi1.macros
@@ -174,37 +178,77 @@ if inputs.mmcif:
               top_directory="nup82-master"))
 
 # We used HHpred to detect remote homologs for some input subunits
-simo.add_metadata(ihm.Software(
+s = ihm.Software(
           name='HHpred', classification='protein homology detection',
           description='Protein homology detection by HMM-HMM comparison',
           version='2.0.16',
-          location='https://toolkit.tuebingen.mpg.de/hhpred'))
+          location='https://toolkit.tuebingen.mpg.de/hhpred')
+if hasattr(ihm, 'citations'):
+    s.citation = ihm.citations.hhpred
+simo.add_metadata(s)
+
 # We used PSIPRED to predict secondary structure for subunits
-simo.add_metadata(ihm.Software(
+s = ihm.Software(
           name='PSIPRED', classification='secondary structure prediction',
           description='Protein secondary structure prediction based on '
                       'position-specific scoring matrices',
           version='4.0',
-          location='http://bioinf.cs.ucl.ac.uk/psipred/'))
+          location='http://bioinf.cs.ucl.ac.uk/psipred/')
+if hasattr(ihm, 'citations'):
+    s.citation = ihm.citations.psipred
+simo.add_metadata(s)
+
 # We used DISOPRED to predict (and remove) disordered regions in the subunits
-simo.add_metadata(ihm.Software(
+s = ihm.Software(
           name='DISOPRED', classification='disorder prediction',
           description='prediction of protein disorder', version=3,
-          location='http://bioinf.cs.ucl.ac.uk/psipred/?disopred=1'))
+          location='http://bioinf.cs.ucl.ac.uk/psipred/?disopred=1')
+if hasattr(ihm, 'citations'):
+    s.citation = ihm.citations.disopred
+simo.add_metadata(s)
+
 # We used DomPred to predict domains
-simo.add_metadata(ihm.Software(
+s = ihm.Software(
           name='DomPred', classification='domain prediction',
           description='prediction of protein domains',
-          location='http://bioinf.cs.ucl.ac.uk/psipred/?dompred=1'))
+          location='http://bioinf.cs.ucl.ac.uk/psipred/?dompred=1')
+if hasattr(ihm, 'citations'):
+    s.citation = ihm.Citation(
+        pmid='17430199',
+        title='Computer-assisted protein domain boundary prediction '
+              'using the DomPred server.',
+        journal='Curr Protein Pept Sci', volume=8, page_range=('181', '188'),
+        year=2007, authors=['Bryson K', 'Cozzetto D', 'Jones DT'],
+        doi='10.2174/138920307780363415')
+simo.add_metadata(s)
+
 # We used COILS/PCOILS and Multicoil2 to predict coiled-coil regions
-simo.add_metadata(ihm.Software(
+s = ihm.Software(
           name='COILS/PCOILS', classification='coiled-coil prediction',
           description='prediction of protein coiled-coil regions',
-          location='https://toolkit.tuebingen.mpg.de/pcoils'))
-simo.add_metadata(ihm.Software(
+          location='https://toolkit.tuebingen.mpg.de/pcoils')
+if hasattr(ihm, 'citations'):
+    s.citation = ihm.Citation(
+        pmid='2031185',
+        title='Predicting coiled coils from protein sequences.',
+        journal='Science', volume=252, page_range=('1162', '1164'),
+        year=1991, authors=['Lupas A', 'Van Dyke M', 'Stock J'],
+        doi='10.1126/science.252.5009.1162')
+simo.add_metadata(s)
+
+s = ihm.Software(
           name='Multicoil2', classification='coiled-coil prediction',
           description='prediction of protein coiled-coil regions',
-          location='http://groups.csail.mit.edu/cb/multicoil2/cgi-bin/multicoil2.cgi'))
+          location='http://groups.csail.mit.edu/cb/multicoil2/cgi-bin/multicoil2.cgi')
+if hasattr(ihm, 'citations'):
+    s.citation = ihm.Citation(
+        pmid='21901122',
+        title='Multicoil2: predicting coiled coils and their oligomerization '
+              'states from sequence in the twilight zone.',
+        journal='PLoS One', volume=6, page_range='e23519', year=2011,
+        authors=['Trigg J', 'Gutwin K', 'Keating AE', 'Berger B'],
+        doi='10.1371/journal.pone.0023519')
+simo.add_metadata(s)
 
 rbmaxtrans = 2.00
 fbmaxtrans = 3.00
